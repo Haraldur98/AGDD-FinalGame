@@ -22,7 +22,6 @@ public class PipeSide : MonoBehaviour
             pipe.needsUpdate = true;
         }
     }
-
     private void OnTriggerExit2D(Collider2D other)
     {
         MiniGameUnoPipe otherPipe = other.transform.parent.GetComponent<MiniGameUnoPipe>();
