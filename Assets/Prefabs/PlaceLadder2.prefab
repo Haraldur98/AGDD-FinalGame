@@ -15,8 +15,7 @@ GameObject:
   - component: {fileID: 613944088377377344}
   - component: {fileID: 4853083184805366661}
   - component: {fileID: 6898527238493264506}
-  - component: {fileID: 1051426433094423241}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Steps
   m_TagString: Steps
   m_Icon: {fileID: 0}
@@ -214,20 +213,6 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
---- !u!114 &1051426433094423241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792679405165209949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2313df6c9e8fe2e479305d43dec788de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ladder: {fileID: 0}
-  scaleSpeed: 0.5
 --- !u!1 &1256210136642480211
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +224,7 @@ GameObject:
   - component: {fileID: 4185540847828116956}
   - component: {fileID: 8615444636152193130}
   - component: {fileID: 4279852075589475246}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bottom
   m_TagString: Steps
   m_Icon: {fileID: 0}
@@ -350,7 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1795502515617654035}
   - component: {fileID: 3060255258487037818}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlaceLadder2
   m_TagString: Steps
   m_Icon: {fileID: 0}

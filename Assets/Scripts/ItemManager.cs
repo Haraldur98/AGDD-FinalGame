@@ -12,10 +12,16 @@ public class ItemManager : MonoBehaviour
     public UnityEngine.Camera mainCamera;
     public bool isPlacingItem = false;
     private bool hasLadder = false;
+    private bool isLadderPlaced = false;
     public Transform playerTransform;
     public ladderExtension ladderExtensionScript;
+    public PickUpRadius pickUpRadiusScript;
+    public UImanager uImanagerScript;
     public float ladderLength = 1f; // The initial length of the ladder
-
+    public LayerMask groundLayer; // Layer of the ground
+    public float groundDistance = 10f; 
+    public float lastHitpont_y = 0;
+ 
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +33,20 @@ public class ItemManager : MonoBehaviour
 
    public void ladderPlacement()
     {
+        
+        // Check if the player is picking up an item
+        if (isLadderPlaced == true && pickUpRadiusScript.canPickUp == true)
+        {   
+            uImanagerScript.ShowIndicator(UImanager.ActionState.PickUp);
+
+
+            if (Input.GetMouseButtonDown(1))
+                Destroy(currentLadder);
+                hasLadder = false;
+        }
+        
         // Check if the player is placing an item
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetMouseButtonDown(1))
         {
             if (isPlacingItem)
             {
@@ -47,57 +65,47 @@ public class ItemManager : MonoBehaviour
             }
         }
 
-        // Check if the player is picking up an item
-        if (Input.GetKeyDown(KeyCode.E))
-        {  
-            
-                Destroy(currentLadder);
-                hasLadder = false;
-        }
 
         // Enter placement mode
         if (isPlacingItem)
         {   
-            // Get mouse and player position
             Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector3 playerPosition = playerTransform.position;
+            Vector3 ladderPosition = playerPosition;
+
 
             // Check if the mouse is to the left of the player
             if (mousePosition.x < playerPosition.x)
             {
-                // Place the ladder to the left
-                Vector3 ladderPosition = playerPosition;
                 ladderPosition.x -= 1; 
-                ladderPosition.y -= 0.5f; 
-                currentLadder.transform.position = ladderPosition;
             }
             // Check if the mouse is to the right of the player
             else if (mousePosition.x > playerPosition.x)
             {
-            // Place the ladder to the right
-                Vector3 ladderPosition = playerPosition;
+                // Place the ladder to the right
                 ladderPosition.x += 1; 
-                ladderPosition.y -= 0.5f; 
-                currentLadder.transform.position = ladderPosition;
-            }
-            // The mouse is directly above or below the player
-            else
-            {
-                // Place the ladder above the player
-                Vector3 ladderPosition = playerPosition;
-                ladderPosition.y += 1; 
-                currentLadder.transform.position = ladderPosition;
             }
 
+            // Position the ladder on the ground
+            RaycastHit2D hit = Physics2D.Raycast(ladderPosition, Vector2.down, groundDistance, groundLayer);
+            if (hit.collider != null)
+            {
+                lastHitpont_y = hit.point.y;
+            }
+
+            ladderPosition.y = lastHitpont_y + 0.15f;
+            // ladderPosition.y = -5;
+            currentLadder.transform.position = ladderPosition;
+            
             // Place the ladder
             // here we place the ladder if the player clicks the mouse
             // the ladder will be placed at the position of the placement indicator
             // the scale of the ladder will be the same as the placement indicator
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && currentLadder.GetComponent<PlacementIndicator>().canPlace)
             {
                 isPlacingItem = false;
                 hasLadder = false;
-                Vector3 ladderPosition = currentLadder.transform.position; // Save the position of the placement indicator
+                Vector3 newladderPosition = currentLadder.transform.position; // Save the position of the placement indicator
 
                 // Get the scale from a child component of currentLadder
                 Transform childTransform = currentLadder.transform.GetChild(0); // Replace 0 with the index of the child
@@ -112,6 +120,8 @@ public class ItemManager : MonoBehaviour
                 // Apply the scale to a child component of the new ladder
                 childTransform = currentLadder.transform.GetChild(0); // Replace 0 with the index of the child
                 childTransform.localScale = childScale;
+
+                isLadderPlaced = true;
             }
         }
     }
