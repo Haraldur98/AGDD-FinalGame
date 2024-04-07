@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Steps
+  - Boundary
+  - Cutter
   layers:
   - Default
   - TransparentFX
