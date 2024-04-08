@@ -6,6 +6,8 @@ public class PlacementIndicator : MonoBehaviour
 {
     public bool canPlace = true; // This variable will be true if the ladder can be placed and false otherwise
     private SpriteRenderer spriteRenderer; // The SpriteRenderer component
+    
+    
      private void Start()
     {
         // Get the SpriteRenderer and Rigidbody2D components
@@ -28,33 +30,6 @@ public class PlacementIndicator : MonoBehaviour
             {
                 sr.color = Color.red;
             }
-        }
+        }        
     }
-
-    // private void onTriggerEnter2D(Collider2D other)
-    // {
-    //     if (!other.gameObject.CompareTag("Steps"))
-    //     {
-    //         canPlace = false;
-    //     }
-    // }
-    
-    // // OnTriggerStay2D is called once per frame for every Collider2D other that is touching the trigger
-    // private void OnTriggerStay2D(Collider2D other)
-    // {
-    //     if (!other.gameObject.CompareTag("Steps"))
-    //     {
-    //         canPlace = false;
-    //     }
-    // }
-
-    // // OnTriggerExit2D is called when the Collider2D other has stopped touching the trigger
-    // private void OnTriggerExit2D(Collider2D other)
-    // {
-    //     if (!other.gameObject.CompareTag("Steps"))
-    //     {
-    //         canPlace = false;
-    //     }
-    // }
-
 }

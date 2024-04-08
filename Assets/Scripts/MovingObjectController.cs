@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class MovingObjectController : MonoBehaviour
 {
-    public float speed = 5.0f; // Speed of the movement
+    public float speed; // Speed of the movement
     private bool movingRight = true; // Direction of movement
-    private bool stopped = false;
+    public bool stopped = true;
     private bool isInBounds = false; // Flag to check if in bounds
     public float leftBound = -5.0f; // Left boundary of the movement
     public float rightBound = 5.0f; // Right boundary of the movement
     private Vector3 startPosition; // Store the start position
     // Get camera
     public Camera mainCamera;
-    private GameManager gameManager;
+    private MiniGame2Manager gameManager;
 
     private GameObject currentBoundary; // Store the current collided boundary object
 
     void Start()
     {
         startPosition = transform.position;
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<MiniGame2Manager>();
     }
 
     void Update()
@@ -54,7 +54,7 @@ public class MovingObjectController : MonoBehaviour
     public void InitializeMovement()
     {
         stopped = false; // Ensure the object is set to move
-        speed = 5.0f; // Set initial speed
+        speed = 10.0f; // Set initial speed
         movingRight = true; // Set initial direction
         leftBound = - 5.0f;
         rightBound = 5.0f;
