@@ -875,7 +875,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.50783944, y: 0.008041501}
+  m_Offset: {x: -0.50783944, y: 0.0046560466}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -886,7 +886,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0156791, y: 1.2412221}
+  m_Size: {x: 2.0156791, y: 0.5841232}
   m_EdgeRadius: 0
 --- !u!114 &4540904619059932409
 MonoBehaviour:
@@ -1070,6 +1070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasWater: 1
   isStartPipe: 0
+  isEndPipe: 0
   isStraightPipe: 0
   StraightWaterPrefab: {fileID: 4130535770380354730, guid: 14c08d2fea2844647904f95f2a696834, type: 3}
   StraightPipePrefab: {fileID: 5041351742114911461, guid: bbf18259cb8f347c886e27b8d774306a, type: 3}
@@ -1105,7 +1106,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.012452364, y: 0.022413969}
@@ -1240,7 +1241,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.51874745, y: -0.005104184}
+  m_Offset: {x: -0.51874745, y: -0.0051053613}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1251,7 +1252,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0374954, y: 1.2041514}
+  m_Size: {x: 2.0374954, y: 0.5809231}
   m_EdgeRadius: 0
 --- !u!114 &3596186088395107622
 MonoBehaviour:

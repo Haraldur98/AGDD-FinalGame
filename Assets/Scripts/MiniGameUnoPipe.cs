@@ -15,9 +15,35 @@ public class MiniGameUnoPipe : MonoBehaviour
     public GameObject KneePipeFrepfab;
     public bool needsUpdate = false;
 
+    public float rotationSpeed = 2.0f; // Speed of rotation
+
+    private bool isRotating = false;
+    public float targetAngle = 0;
+
     private void OnMouseDown()
     {
-        transform.Rotate(new Vector3(0, 0, 90));
+        if (!isRotating)
+        {
+            targetAngle -= 90; // Assuming you want to rotate 90 degrees each click
+            StartCoroutine(RotatePipe());
+        }
+    }
+
+    private IEnumerator RotatePipe()
+    {
+        isRotating = true;
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, 0, -90));
+        float time = 0.0f;
+
+        while (time < 1.0f)
+        {
+            time += Time.deltaTime * rotationSpeed;
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
+            yield return null;
+        }
+
+        isRotating = false;
     }
 
     private void Update()
@@ -34,7 +60,7 @@ public class MiniGameUnoPipe : MonoBehaviour
 
         GameObject prefab = hasWater ? (isStraightPipe ? StraightWaterPrefab : KneePipeWaterPrefab) :
                                                          (isStraightPipe ? StraightPipePrefab : KneePipeFrepfab);
-        MiniGameUnoPipe newPipe = Instantiate(prefab, transform.position, transform.rotation, transform.parent).GetComponent<MiniGameUnoPipe>(); ;
+        MiniGameUnoPipe newPipe = Instantiate(prefab, transform.position, transform.rotation, transform.parent).GetComponent<MiniGameUnoPipe>(); 
 
         if (isEndPipe)
             newPipe.isEndPipe = true;

@@ -25,7 +25,6 @@ public class PipeSide : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         MiniGameUnoPipe otherPipe = other.transform.parent.GetComponent<MiniGameUnoPipe>();
-
         if (otherPipe != null && otherPipe.hasWater)
         {
             if (!pipe.hasWater) return;
