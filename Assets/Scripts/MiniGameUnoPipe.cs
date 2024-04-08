@@ -48,7 +48,7 @@ public class MiniGameUnoPipe : MonoBehaviour
 
     private void Update()
     {
-        if (needsUpdate)
+        if (needsUpdate && !isRotating)
         {
             ChangePipe();
         }
