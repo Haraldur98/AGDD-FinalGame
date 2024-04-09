@@ -3,14 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-<<<<<<< HEAD
-  tags:
-  - Steps
-  - Cutter
-  - Stairs
-=======
   tags: []
->>>>>>> 464fce0558e5ede22751beb7ec77c4fc5fc327d6
   layers:
   - Default
   - TransparentFX
@@ -18,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Radius
+  - 
   - 
   - 
   - 
