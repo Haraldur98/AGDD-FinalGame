@@ -63,7 +63,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ladder: {fileID: 792679405165209949}
-  scaleSpeed: 0.5
+  scaleSpeed: 2
+  minScale: 2
+  maxScale: 10
 --- !u!212 &8874759803313817752
 SpriteRenderer:
   m_ObjectHideFlags: 0

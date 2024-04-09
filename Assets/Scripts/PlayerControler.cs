@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     public ItemManager itemManager;
     public Vector2 ladderDirection;
 
+    public UImanager uImanagerScript;
+
     private Rigidbody2D rb;
 
     [Header("Animation")]
@@ -239,7 +241,10 @@ public class PlayerController : MonoBehaviour
     
 
     void OnCollisionEnter2D(Collision2D collision)
-    {
+    {   
+
+        // Debug.Log("Collided with " + collision.gameObject.name);
+        // Debug.Log("Collided with " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Steps"))
         {
             isClimbing = true;
@@ -261,7 +266,8 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Stairs"))
-        {
+        {   
+            uImanagerScript.ShowIndicator(UImanager.ActionState.Climb);
             isOnStairs = true;
         }
     }
@@ -272,6 +278,7 @@ public class PlayerController : MonoBehaviour
         {
             isOnStairs = false;
             isClimbingStairs = false;
+            uImanagerScript.ShowIndicator(UImanager.ActionState.None);
         }
     }
 
