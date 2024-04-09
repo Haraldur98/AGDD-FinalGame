@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 613944088377377344}
   - component: {fileID: 4853083184805366661}
   - component: {fileID: 6898527238493264506}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Steps
   m_TagString: Steps
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 6911306891997630327}
   - component: {fileID: 962319724568098158}
   - component: {fileID: 5722538476123862273}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1795502515617654035}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Ladder
   m_TagString: Steps
   m_Icon: {fileID: 0}

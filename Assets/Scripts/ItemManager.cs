@@ -37,8 +37,6 @@ public class ItemManager : MonoBehaviour
         // Check if the player is picking up an item
         if (isLadderPlaced == true && pickUpRadiusScript.canPickUp == true)
         {   
-            uImanagerScript.ShowIndicator(UImanager.ActionState.PickUp);
-
 
             if (Input.GetMouseButtonDown(1))
                 Destroy(currentLadder);

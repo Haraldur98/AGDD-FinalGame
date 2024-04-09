@@ -6,71 +6,49 @@ public class PickUpRadius : MonoBehaviour
 {
     public bool canPickUp = false;
     public bool canEnter = false;
+
+    public UImanager uImanagerScript;
+
     // Start is called before the first frame update
-    public float detectionRadius = 100f; // Adjust this value as needed
     void Start()
     {
         
     }
 
     // Update is called once per frame
+    void Update()
+    {
+        
+    }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {   
         Debug.Log("Collided with " + other.gameObject.name);
         if (other.CompareTag("Steps"))
         {
             canPickUp = true;
+            uImanagerScript.ShowIndicator(UImanager.ActionState.PickUp);
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        Debug.Log("Collided with " + other.gameObject.name);
+    // private void OnTriggerStay(Collider other)
+    // {
+    //     Debug.Log("Collided with " + other.gameObject.name);
         
-        if (other.CompareTag("Steps"))
-        {
-            canPickUp = true;
-        }
-    }
+    //     if (other.CompareTag("Steps"))
+    //     {
+    //         canPickUp = true;
+    //     }
+    // }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         Debug.Log("Collided with " + other.gameObject.name);
 
         if (other.CompareTag("Steps"))
         {
             canPickUp = false;
-        }
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        Debug.Log("Collided with " + other.gameObject.name);
-        
-        if (other.gameObject.CompareTag("Steps"))
-        {
-            canPickUp = true;
-        }
-    }
-
-    private void OnCollisionStay(Collision other)
-    {
-        Debug.Log("Collided with " + other.gameObject.name);
-
-        if (other.gameObject.CompareTag("Steps"))
-        {
-            canPickUp = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        Debug.Log("Collided with " + other.gameObject.name);
-
-        if (other.gameObject.CompareTag("Steps"))
-        {
-            canPickUp = false;
+            uImanagerScript.ShowIndicator(UImanager.ActionState.None);
         }
     }
 }
