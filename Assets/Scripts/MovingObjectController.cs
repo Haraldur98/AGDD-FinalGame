@@ -44,8 +44,8 @@ public class MovingObjectController : MonoBehaviour
             transform.Translate(-speed * Time.deltaTime, 0, 0);
         }
 
-        // Stop the object when space is pressed
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Stop the object when space is pressed or clicked
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             ToggleMovement();
         }
@@ -70,9 +70,9 @@ public class MovingObjectController : MonoBehaviour
 
         if (stopped && isInBounds && currentBoundary != null)
         {
-            // Use the stored reference to the boundary object
-            // For example, destroy it or perform some action with it
-            Destroy(currentBoundary);
+            // Destroy the boundary object and its parent
+            // Destroy(currentBoundary.transform.parent.gameObject);
+            currentBoundary.transform.parent.gameObject.SetActive(false);
             gameManager.BoundaryDestroyed(); // Notify the GameManager
             Destroy(gameObject); // Destroy this movable object
             gameManager.SpawnNewMovable(startPosition);
