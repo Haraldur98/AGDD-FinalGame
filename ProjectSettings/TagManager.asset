@@ -3,16 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Ground
-  - Steps
-<<<<<<< HEAD
-  - Boundary
-  - Cutter
-=======
-  - Stairs
-  - trigger
->>>>>>> d5682ebbcec25e8d94514a8543a325037479de27
+  tags: []
   layers:
   - Default
   - TransparentFX
