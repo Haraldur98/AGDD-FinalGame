@@ -6,6 +6,7 @@ using UnityEngine;
 public class MiniGame2Manager : MonoBehaviour
 {
     public GameObject movablePrefab; // Assign in inspector
+    public GameObject miniGame;
     public GameObject mainPart; // Assign in inspector
     public GameObject fixedPartPrefab; // Assign in inspector
     private int boundariesDestroyed = 0; // Set to your movable object's start position
@@ -21,6 +22,8 @@ public class MiniGame2Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             tutorialPanel.SetActive(false);
+            miniGame.SetActive(true);
+            scoreText.gameObject.SetActive(true);
             movablePrefab.GetComponent<MovingObjectController>().stopped = false;
             movablePrefab.GetComponent<MovingObjectController>().speed = 10.0f;
         }
@@ -74,6 +77,7 @@ public class MiniGame2Manager : MonoBehaviour
         }
         Destroy(mainPart);
         // Destroy the main part after falling for the duration
+        Debug.Log("Main part destroyed");
         fixedPartPrefab.GetComponent<FloatToPosition>().InitializeMovement();
     }
 }

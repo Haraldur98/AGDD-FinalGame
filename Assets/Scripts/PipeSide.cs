@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class PipeSide : MonoBehaviour
 {
     private MiniGameUnoPipe pipe;
@@ -11,25 +8,39 @@ public class PipeSide : MonoBehaviour
         pipe = transform.parent.GetComponent<MiniGameUnoPipe>();
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         MiniGameUnoPipe otherPipe = other.transform.parent.GetComponent<MiniGameUnoPipe>();
 
-        if (otherPipe != null && otherPipe.hasWater)
+        // Establish connection if not already connected
+        if (otherPipe != null && pipe.connectionOne != otherPipe && pipe.connectionTwo != otherPipe)
         {
-            if (pipe.hasWater) return;
-            pipe.hasWater = true;
-            pipe.needsUpdate = true;
+            if (pipe.connectionOne == null)
+            {
+                pipe.connectionOne = otherPipe;
+            }
+            else if (pipe.connectionTwo == null)
+            {
+                pipe.connectionTwo = otherPipe;
+            }
         }
     }
+
     private void OnTriggerExit2D(Collider2D other)
     {
         MiniGameUnoPipe otherPipe = other.transform.parent.GetComponent<MiniGameUnoPipe>();
-        if (otherPipe != null && otherPipe.hasWater)
+
+        // Sever the connection
+        if (otherPipe != null)
         {
-            if (!pipe.hasWater) return;
-            pipe.hasWater = false;
-            pipe.needsUpdate = true;
+            if (pipe.connectionOne == otherPipe)
+            {
+                pipe.connectionOne = null;
+            }
+            else if (pipe.connectionTwo == otherPipe)
+            {
+                pipe.connectionTwo = null;
+            }
         }
     }
 }
