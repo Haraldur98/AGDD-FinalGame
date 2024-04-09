@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &3811113 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8658710147832292046, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
-  m_PrefabInstance: {fileID: 1076904072}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &18451811
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,21 +215,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &487887716 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9214968472350559929, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
-  m_PrefabInstance: {fileID: 1076904072}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &551663577 stripped
+--- !u!114 &261479422 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7496265091556463111, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
-  m_PrefabInstance: {fileID: 1076904072}
+  m_PrefabInstance: {fileID: 1293475731}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -277,9 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e0a8e10ce9db441ba9ee9ced36e7db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameInputField: {fileID: 551663577}
-  tutorialToggle: {fileID: 3811113}
-  highScoresText: {fileID: 487887716}
+  nameInputField: {fileID: 261479422}
+  tutorialToggle: {fileID: 1901809716}
+  highScoresText: {fileID: 1021777285}
 --- !u!4 &740367268
 Transform:
   m_ObjectHideFlags: 0
@@ -363,7 +341,18 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
---- !u!1001 &1076904072
+--- !u!114 &1021777285 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9214968472350559929, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
+  m_PrefabInstance: {fileID: 1293475731}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &1293475731
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -459,17 +448,9 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartGame
       objectReference: {fileID: 0}
-    - target: {fileID: 5712642145219610277, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7393464211189641426, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
       propertyPath: m_Name
       value: main menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 9055301957783898464, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
-      propertyPath: m_VertexColorAlwaysGammaSpace
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -520,6 +501,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1901809716 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8658710147832292046, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
+  m_PrefabInstance: {fileID: 1293475731}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -528,4 +520,4 @@ SceneRoots:
   - {fileID: 1667140013}
   - {fileID: 982836118}
   - {fileID: 740367268}
-  - {fileID: 1076904072}
+  - {fileID: 1293475731}

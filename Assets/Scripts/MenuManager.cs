@@ -1,18 +1,20 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using System.Linq;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
-    public TMPro.TMP_InputField nameInputField;
-    public Toggle tutorialToggle; // Assign this in the inspector
-    public TMPro.TextMeshProUGUI highScoresText;
-
+    public TMP_InputField nameInputField;
+    public Toggle tutorialToggle;
+    public TextMeshProUGUI highScoresText;
     private void Start()
     {
         // Update the high scores
         UpdateHighScores();
+        LogPlayerPrefs();
     }
 
     public void StartGame()
@@ -26,21 +28,34 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetInt("Tutorial", tutorial ? 1 : 0);
 
         // Load the game scene
-        SceneManager.LoadScene("laddertest");
+        SceneManager.LoadScene("DefaultScene");
         Debug.Log("StartGame");
     }
 
     private void UpdateHighScores()
     {
         // Get the high scores
-        HighScoreManager highScoreManager = HighScoreManager.Instance;
-        Debug.Log("HighScoreManager.Instance: " + highScoreManager);
-        
-        List<int> highScores = highScoreManager.GetHighScores();
-        Debug.Log("highScores: " + highScores);
+        Dictionary<string, int> highScores = HighScoreManager.Instance.GetHighScores();
 
         // Update the high scores text
-        Debug.Log("highScoresText: " + highScoresText);
-        highScoresText.text = string.Join("\n", highScores);
+        highScoresText.text = string.Join("\n", highScores.Select(x => x.Key + ": " + x.Value));
+    }
+
+    public void LogPlayerPrefs()
+    {
+        // List of keys you want to check
+        string[] keys = new string[] { "PlayerName", "Tutorial", "HighScores" };
+
+        foreach (string key in keys)
+        {
+            if (PlayerPrefs.HasKey(key))
+            {
+                Debug.Log(key + ": " + PlayerPrefs.GetString(key));
+            }
+            else
+            {
+                Debug.Log("No value found for key: " + key);
+            }
+        }
     }
 }

@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro; // Include the TextMeshPro namespace
+using UnityEngine.SceneManagement; // Include the UI namespace
+
 
 public class EndScreenManager : MonoBehaviour
 {
-    public static EndScreenManager Instance { get; private set; } // Singleton instance
-    public GameObject endScreen; // Reference to the end screen
+    public TextMeshProUGUI playername; // Reference to the score text
     public TextMeshProUGUI scoreText; // Reference to the score text
 
-    void Awake()
+    // Start is called before the first frame update
+    void Start()
     {
-        // Initialize the singleton instance
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        // Get the player's name
+        string playerName = PlayerPrefs.GetString("PlayerName", "Player");
+        playername.text = playerName;
+
+        // Get the score
+        int score = PlayerPrefs.GetInt("Score", 0) + 100;
+        scoreText.text = "Score: " + score;
     }
 
-    public void ShowEndScreen(int score)
+    public void PlayAgainButton()
     {
-        // Update the score text
-        scoreText.text = "Score: " + score;
+        // Reload the game scene
+        SceneManager.LoadScene("DefaultScene");
+    }
 
-        // Show the end screen
-        endScreen.SetActive(true);
+    public void MainMenuButton()
+    {
+        // Load the main menu scene
+        SceneManager.LoadScene("MainMenu");
     }
 }

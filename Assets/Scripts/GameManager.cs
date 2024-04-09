@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public float time { get; private set; } // The current time
     public int coins { get; private set; } // The number of coins
-    public float gameDuration = 30; // The duration of a month in seconds
+    public float gameDuration = 4; // The duration of a month in seconds
     public Slider timeSlider; // Reference to the slider
     public TextMeshProUGUI coinText; // Reference to the TextMeshPro text
     public int[] currentLevelsMiniGames = new int[3] { 0, 0, 0 };
@@ -39,9 +39,15 @@ public class GameManager : MonoBehaviour
     }
 
     void EndGame()
-    {
-        // Show the end screen
-        // EndScreenManager.Instance.ShowEndScreen(coins);
+    {   
+        // Get the player's name
+        string playerName = PlayerPrefs.GetString("PlayerName", "Player");
+        // Save the high score
+        HighScoreManager.Instance.AddHighScore(playerName , coins);
+         // Save the player's score
+        PlayerPrefs.SetInt("Score", coins);
+        // Load the end screen
+        SceneManager.LoadScene("EndScreen");
 
     }
 
