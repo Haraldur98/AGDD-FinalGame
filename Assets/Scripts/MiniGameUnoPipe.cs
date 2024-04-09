@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -8,24 +9,24 @@ public class MiniGameUnoPipe : MonoBehaviour
     public bool hasWater = false;
     public bool isStartPipe = false;
     public bool isEndPipe = false;
-    public bool isStraightPipe = false;
-    public GameObject StraightWaterPrefab;
-    public GameObject StraightPipePrefab;
-    public GameObject KneePipeWaterPrefab;
-    public GameObject KneePipeFrepfab;
-    public bool needsUpdate = false;
 
-    public float rotationSpeed = 2.0f; // Speed of rotation
+    public bool needsUpdate = false;
+    public GameObject filledPipe;
+
+    public float rotationSpeed = 4.0f; // Speed of rotation
 
     private bool isRotating = false;
     public float targetAngle = 0;
+    public MiniGameUnoPipe connectionOne;
+    public MiniGameUnoPipe connectionTwo;
 
     private void OnMouseDown()
     {
         if (!isRotating)
         {
-            targetAngle -= 90; // Assuming you want to rotate 90 degrees each click
+            targetAngle -= 90; 
             StartCoroutine(RotatePipe());
+            
         }
     }
 
@@ -44,26 +45,28 @@ public class MiniGameUnoPipe : MonoBehaviour
         }
 
         isRotating = false;
+        FindObjectOfType<MiniGameManager>().PropagateWater();
     }
 
-    private void Update()
+    public void PropagateWater(bool status)
     {
-        if (needsUpdate && !isRotating)
+        if (hasWater != status || isStartPipe)
         {
+            hasWater = status;
             ChangePipe();
+            // Propagate the water status to connected pipes
+            connectionOne?.PropagateWater(status);
+            connectionTwo?.PropagateWater(status);
         }
     }
 
-    private void ChangePipe()
+    public void ChangePipe()
     {
         if (isStartPipe) return;
-
-        GameObject prefab = hasWater ? (isStraightPipe ? StraightWaterPrefab : KneePipeWaterPrefab) :
-                                                         (isStraightPipe ? StraightPipePrefab : KneePipeFrepfab);
-        MiniGameUnoPipe newPipe = Instantiate(prefab, transform.position, transform.rotation, transform.parent).GetComponent<MiniGameUnoPipe>(); 
-
-        if (isEndPipe)
-            newPipe.isEndPipe = true;
-        Destroy(gameObject);
+        if (hasWater) {
+            filledPipe.SetActive(true);
+        } else {
+            filledPipe.SetActive(false);
+        }
     }
 }
