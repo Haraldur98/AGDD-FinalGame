@@ -71,7 +71,8 @@ public class MovingObjectController : MonoBehaviour
         if (stopped && isInBounds && currentBoundary != null)
         {
             // Destroy the boundary object and its parent
-            Destroy(currentBoundary.transform.parent.gameObject);
+            // Destroy(currentBoundary.transform.parent.gameObject);
+            currentBoundary.transform.parent.gameObject.SetActive(false);
             gameManager.BoundaryDestroyed(); // Notify the GameManager
             Destroy(gameObject); // Destroy this movable object
             gameManager.SpawnNewMovable(startPosition);

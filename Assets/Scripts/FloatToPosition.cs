@@ -14,6 +14,7 @@ public class FloatToPosition : MonoBehaviour
     {
         // Trigger the animation by playing the animation clip's name
         animator.Play("FixPipe");
+        FindObjectOfType<MiniGame2Manager>().ReappearBoundary();
     }
 
     // You might want to detect when the animation is done to destroy the object or trigger other events

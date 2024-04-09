@@ -12,7 +12,10 @@ public class MiniGameManager : MonoBehaviour
     private MiniGameUnoPipe endPipe;
     public bool timerIsRunning = false;
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI cashText;
+    public int score = 2000;
     private float timeToDisplay = 0;
+    private float scoreDecrementTimer = 0f;
 
 
     int totalPipes = 0;
@@ -49,11 +52,18 @@ public class MiniGameManager : MonoBehaviour
             timeToDisplay += Time.deltaTime; // Ensure the last second is counted
 
             float minutes = Mathf.FloorToInt(timeToDisplay / 60); 
-            float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-
+            float seconds = Mathf.FloorToInt(timeToDisplay % 60); 
+        
             // Update the display text
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            scoreDecrementTimer += Time.deltaTime;
+            if (scoreDecrementTimer >= 5f) // Every 5 seconds
+            {
+                score -= 100; // Decrement score
+                cashText.text = "Cash for job: " + score + "$"; // Update the score display
+                scoreDecrementTimer = 0f; // Reset the timer
             }
+        }
     }
 
     // Call this method to start the water flow from the starting pipe

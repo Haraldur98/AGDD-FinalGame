@@ -13,6 +13,8 @@ public class MiniGame2Manager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public GameObject tutorialPanel;
     public int score = 2000;
+    public GameObject leftBoundary;
+    public GameObject rightBoundary;
 
     // Call this when you need to spawn a new movable object
 
@@ -79,5 +81,22 @@ public class MiniGame2Manager : MonoBehaviour
         // Destroy the main part after falling for the duration
         Debug.Log("Main part destroyed");
         fixedPartPrefab.GetComponent<FloatToPosition>().InitializeMovement();
+    }
+
+    public void ReappearBoundary() {
+        // get left and right boundary objects
+        leftBoundary.SetActive(true);
+        rightBoundary.SetActive(true);
+        
+        // for each child object of boundary, set the sprite render color to green
+        foreach (Transform child in leftBoundary.transform)
+        {
+            child.GetComponent<SpriteRenderer>().color = Color.green;
+        }
+        foreach (Transform child in rightBoundary.transform)
+        {
+            child.GetComponent<SpriteRenderer>().color = Color.green;
+        }
+        
     }
 }
