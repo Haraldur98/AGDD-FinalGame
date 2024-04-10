@@ -393,6 +393,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 788757533897815800, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 788757533897815800, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 788757533897815800, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 788757533897815800, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -448,9 +460,33 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartGame
       objectReference: {fileID: 0}
+    - target: {fileID: 6063179930153861583, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6063179930153861583, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6063179930153861583, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6063179930153861583, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 800
+      objectReference: {fileID: 0}
     - target: {fileID: 7393464211189641426, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
       propertyPath: m_Name
       value: main menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055301957783898464, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 18451813}
+    - target: {fileID: 9055301957783898464, guid: 5b9775249ffbe994aab627557caea4c1, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

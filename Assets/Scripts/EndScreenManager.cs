@@ -19,7 +19,7 @@ public class EndScreenManager : MonoBehaviour
         playername.text = playerName;
 
         // Get the score
-        int score = PlayerPrefs.GetInt("Score", 0) + 100;
+        int score = PlayerPrefs.GetInt("Score", 0);
         scoreText.text = "Score: " + score;
     }
 
