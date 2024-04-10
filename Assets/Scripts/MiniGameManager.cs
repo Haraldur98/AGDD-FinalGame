@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class MiniGameManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class MiniGameManager : MonoBehaviour
     private float timeToDisplay = 0;
     private float scoreDecrementTimer = 0f;
 
+    public UnityEvent onMiniGameEnd;
 
     int totalPipes = 0;
     float[] rotations = { 0, 90, 180, 270 };
@@ -45,6 +47,9 @@ public class MiniGameManager : MonoBehaviour
         {
             Debug.Log("BINGO");
             timerIsRunning = false; // Stop the timer when the game ends
+
+            // Trigger the onMiniGameEnd event
+            onMiniGameEnd?.Invoke();
         }
 
         if (timerIsRunning)

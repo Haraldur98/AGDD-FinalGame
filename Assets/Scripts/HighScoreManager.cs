@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ public class HighScoreManager : MonoBehaviour
 {
     public static HighScoreManager Instance { get; private set; }
     private const int MaxHighScores = 10;
+
     private void Awake()
     {
         if (Instance == null)
@@ -19,43 +20,38 @@ public class HighScoreManager : MonoBehaviour
         }
     }
 
-    public void AddHighScore(int score)
+    public void AddHighScore(string playerName, int score)
     {
         // Get the current high scores
-        List<int> highScores = GetHighScores();
+        Dictionary<string, int> highScores = GetHighScores();
 
         // Add the new score
-        highScores.Add(score);
+        highScores[playerName] = score;
 
-        // Sort the list in descending order
-        highScores.Sort((a, b) => b.CompareTo(a));
-
-        // If there are more than the max number of high scores, remove the lowest ones
-        while (highScores.Count > MaxHighScores)
-        {
-            highScores.RemoveAt(highScores.Count - 1);
-        }
+        // Sort the list in descending order and keep the top 5 scores
+        highScores = highScores.OrderByDescending(x => x.Value).Take(MaxHighScores).ToDictionary(x => x.Key, x => x.Value);
 
         // Save the high scores
-        for (int i = 0; i < highScores.Count; i++)
-        {
-            PlayerPrefs.SetInt("HighScore" + i, highScores[i]);
-        }
+        PlayerPrefs.SetString("HighScores", string.Join(",", highScores.Select(x => x.Key + ":" + x.Value)));
     }
 
-    public List<int> GetHighScores()
+    public Dictionary<string, int> GetHighScores()
     {
-        List<int> highScores = new List<int>();
+        Dictionary<string, int> highScores = new Dictionary<string, int>();
 
-        for (int i = 0; i < MaxHighScores; i++)
+        // Get the high scores string from PlayerPrefs
+        string highScoresString = PlayerPrefs.GetString("HighScores", "");
+
+        // Split the string into individual scores
+        string[] highScoresArray = highScoresString.Split(',');
+
+        // Parse each score and add it to the dictionary
+        foreach (string highScore in highScoresArray)
         {
-            if (PlayerPrefs.HasKey("HighScore" + i))
+            string[] parts = highScore.Split(':');
+            if (parts.Length == 2 && int.TryParse(parts[1], out int score))
             {
-                highScores.Add(PlayerPrefs.GetInt("HighScore" + i));
-            }
-            else
-            {
-                break;
+                highScores[parts[0]] = score;
             }
         }
 

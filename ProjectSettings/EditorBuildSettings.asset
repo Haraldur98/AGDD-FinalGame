@@ -12,6 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 8658c5804b62a7b4dadcae53ba186d6c
   - enabled: 1
-    path: Assets/Scenes/laddertest.unity
-    guid: 2963dc15b64b724429e3ccbfd9898d52
+    path: Assets/Scenes/DefaultScene.unity
+    guid: 83d4c06c6d97243a591513885e4ecc2f
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: 60acc4603c9d9d24f88774ff51f7a9b7
+  - enabled: 1
+    path: Assets/Scenes/minigame2.unity
+    guid: 6f3ca3c57e69241a2ab555c6fe551dd3
+  - enabled: 1
+    path: Assets/Scenes/MiniGameUNO.unity
+    guid: 7990e1c08a37d4e27a0fab7de6e8712f
   m_configObjects: {}
