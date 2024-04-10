@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class MiniGame2Manager : MonoBehaviour
@@ -17,6 +18,8 @@ public class MiniGame2Manager : MonoBehaviour
     public GameObject rightBoundary;
     private Vector3 initalPosition;
     private bool fixing = false;
+
+    public UnityEvent onMiniGameEnd;
 
     public void SpawnNewMovable(Vector3 startPosition)
     {
@@ -48,6 +51,7 @@ public class MiniGame2Manager : MonoBehaviour
             Debug.Log("WIN");
             movablePrefab = null;
             fixing = false;
+            onMiniGameEnd?.Invoke();
         }
     }
 

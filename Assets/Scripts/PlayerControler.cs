@@ -105,7 +105,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.gravityScale = 1;
-            // transform.up = Vector2.up;
         }
     }
 
@@ -234,17 +233,11 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("climbIdle", false);
         }
-
-
-
     }
     
 
     void OnCollisionEnter2D(Collision2D collision)
     {   
-
-        // Debug.Log("Collided with " + collision.gameObject.name);
-        // Debug.Log("Collided with " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Steps"))
         {
             isClimbing = true;
@@ -264,16 +257,17 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other)
-    {
+    {   
+
         if (other.gameObject.CompareTag("Stairs"))
         {   
-            uImanagerScript.ShowIndicator(UImanager.ActionState.Climb);
             isOnStairs = true;
+            uImanagerScript.ShowIndicator(UImanager.ActionState.Climb);
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
-    {
+    {   
         if (other.gameObject.CompareTag("Stairs"))
         {
             isOnStairs = false;

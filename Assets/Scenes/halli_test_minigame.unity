@@ -46645,7 +46645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &472057819
 Transform:
   m_ObjectHideFlags: 0
@@ -46673,11 +46673,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4885778542779818777, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 125.43312
+      value: 170.3
       objectReference: {fileID: 0}
     - target: {fileID: 4885778542779818777, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 137.38818
+      value: 119.3
       objectReference: {fileID: 0}
     - target: {fileID: 4885778542779818777, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -46717,7 +46717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5559325782334643282, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -72554,6 +72554,61 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &934556186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 934556188}
+  - component: {fileID: 934556187}
+  m_Layer: 0
+  m_Name: minigameManagers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &934556187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934556186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ff6879596ec4b8aae465d47a24b7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pipeHolder: {fileID: 0}
+  startingPipe: {fileID: 0}
+  pipes: []
+  endPipeGameObject: {fileID: 0}
+  timerIsRunning: 0
+  timerText: {fileID: 0}
+  cashText: {fileID: 0}
+  score: 2000
+  onMiniGameEnd:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &934556188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934556186}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.457787, y: -13.435362, z: 5.6296268}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &941621435
 GameObject:
   m_ObjectHideFlags: 0
@@ -72602,6 +72657,7 @@ MonoBehaviour:
   timeSlider: {fileID: 1839560466}
   coinText: {fileID: 1750856543}
   currentLevelsMiniGames: 000000000000000000000000
+  miniGameManager: {fileID: 934556187}
 --- !u!1 &958190512
 GameObject:
   m_ObjectHideFlags: 0
@@ -81436,7 +81492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 768301922689895015, guid: df1ae446cfd814c9882f1fcd3681ee30, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4372307473798563579, guid: df1ae446cfd814c9882f1fcd3681ee30, type: 3}
       propertyPath: m_IsActive
@@ -81444,11 +81500,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5372473203479738908, guid: df1ae446cfd814c9882f1fcd3681ee30, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.3139913
+      value: 41.9
       objectReference: {fileID: 0}
     - target: {fileID: 5372473203479738908, guid: df1ae446cfd814c9882f1fcd3681ee30, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.32847798
+      value: -40.3
       objectReference: {fileID: 0}
     - target: {fileID: 5372473203479738908, guid: df1ae446cfd814c9882f1fcd3681ee30, type: 3}
       propertyPath: m_LocalPosition.z
@@ -81484,7 +81540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7129600736337857989, guid: df1ae446cfd814c9882f1fcd3681ee30, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -85770,3 +85826,4 @@ SceneRoots:
   - {fileID: 2003714904}
   - {fileID: 1274969361}
   - {fileID: 472057819}
+  - {fileID: 934556188}

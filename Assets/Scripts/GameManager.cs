@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public float time { get; private set; } // The current time
     public int coins { get; private set; } // The number of coins
-    public float gameDuration = 4; // The duration of a month in seconds
+    public float gameDuration = 20; // The duration of a month in seconds
     public Slider timeSlider; // Reference to the slider
     public TextMeshProUGUI coinText; // Reference to the TextMeshPro text
     public int[] currentLevelsMiniGames = new int[3] { 0, 0, 0 };
@@ -19,8 +19,32 @@ public class GameManager : MonoBehaviour
     {
         time = 0;
         coins = 0;
-        coinText.text = "Coins: " + coins; // Initialize the text
+        coinText.text = "<color=green>$</color>:" + coins; // Initialize the text
         timeSlider.maxValue = gameDuration; // Initialize the slider's max value
+
+        // Subscribe to the onMiniGameEnd event
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Check if the loaded scene is a mini-game scene
+        if (scene.name == "MiniGameUNO")
+        {
+            // Find the MiniGameManager in the loaded scene
+            MiniGameManager miniGameManager = GameObject.FindObjectOfType<MiniGameManager>();
+
+            // Subscribe to the onMiniGameEnd event
+            miniGameManager.onMiniGameEnd.AddListener(() => EndMiniGame(scene.name));
+        }
+        else if (scene.name == "minigame2")
+        {
+            // Find the MiniGameManager in the loaded scene
+            MiniGame2Manager miniGameManager2 = GameObject.FindObjectOfType<MiniGame2Manager>();
+
+            // Subscribe to the onMiniGameEnd event
+            miniGameManager2.onMiniGameEnd.AddListener(() => EndMiniGame(scene.name));
+        }
     }
 
     // Update is called once per frame
@@ -28,7 +52,7 @@ public class GameManager : MonoBehaviour
     {
         // Increment the time by the time since the last frame
         time += Time.deltaTime;
-        coinText.text = "Coins: " + coins; // Update the text
+        coinText.text = "<color=green>$</color>:" + coins; // Update the text
         timeSlider.value = time; // Update the slider's value
 
         if (time >= gameDuration)
@@ -55,7 +79,13 @@ public class GameManager : MonoBehaviour
     public void LoadMiniGame(string sceneName)
     {
 
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+    }
+
+    public void EndMiniGame(string miniGameSceneName)
+    {
+        // Unload the mini-game scene
+        SceneManager.UnloadSceneAsync(miniGameSceneName);
     }
 
     // Method to increase the number of coins
@@ -84,4 +114,9 @@ public class GameManager : MonoBehaviour
     {
         return currentLevelsMiniGames;
     }
+
+    void OnDestroy()
+{
+    SceneManager.sceneLoaded -= OnSceneLoaded;
+}
 }

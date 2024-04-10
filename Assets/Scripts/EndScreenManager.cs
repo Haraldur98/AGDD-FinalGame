@@ -20,7 +20,7 @@ public class EndScreenManager : MonoBehaviour
 
         // Get the score
         int score = PlayerPrefs.GetInt("Score", 0);
-        scoreText.text = "Score: " + score;
+        scoreText.text = "<color=green>$</color>" + score;
     }
 
     public void PlayAgainButton()

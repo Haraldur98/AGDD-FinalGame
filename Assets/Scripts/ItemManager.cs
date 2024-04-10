@@ -5,22 +5,30 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
 
-    [Header("ladder Variables")]
+    [Header("ladder Prefabs")]
     public GameObject ladderPrefab;
-    public GameObject currentLadder;
     public GameObject placementIndicator;
-    public UnityEngine.Camera mainCamera;
-    public bool isPlacingItem = false;
+    public GameObject currentLadder;
+
+    [Header("ladder Variables")]
     private bool hasLadder = false;
-    private bool isLadderPlaced = false;
-    public Transform playerTransform;
-    public ladderExtension ladderExtensionScript;
-    public PickUpRadius pickUpRadiusScript;
-    public UImanager uImanagerScript;
+    public UnityEngine.Camera mainCamera; 
+    public bool isPlacingItem = false;
+    public bool isLadderPlaced = false;
     public float ladderLength = 1f; // The initial length of the ladder
-    public LayerMask groundLayer; // Layer of the ground
     public float groundDistance = 10f; 
     public float lastHitpont_y = 0;
+    
+    [Header("Player Variables")]
+    private Transform playerTransform;
+    public PickUpRadius pickUpRadiusScript;
+    
+    [Header("UI Manager to show the indicator")]
+    public UImanager uImanagerScript;
+    
+    [Header("Ground Detection Layer")]
+    public LayerMask groundLayer; // Layer of the ground
+    // public ladderExtension ladderExtensionScript;
  
 
     // Start is called before the first frame update
