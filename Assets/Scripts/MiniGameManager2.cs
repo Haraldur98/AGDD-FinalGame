@@ -12,35 +12,26 @@ public class MiniGame2Manager : MonoBehaviour
     private int boundariesDestroyed = 0; // Set to your movable object's start position
     public TextMeshProUGUI scoreText;
     public GameObject tutorialPanel;
-    public int score = 2000;
+    public int score;
     public GameObject leftBoundary;
     public GameObject rightBoundary;
+    private Vector3 initalPosition;
+    private bool fixing = false;
 
-    // Call this when you need to spawn a new movable object
-
-    void Update()
-    {
-        // when enter is pressed, close the tutorial panel
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            tutorialPanel.SetActive(false);
-            miniGame.SetActive(true);
-            scoreText.gameObject.SetActive(true);
-            movablePrefab.GetComponent<MovingObjectController>().stopped = false;
-            movablePrefab.GetComponent<MovingObjectController>().speed = 10.0f;
-        }
-    }
     public void SpawnNewMovable(Vector3 startPosition)
     {
         // add z position to the start position
-        if (movablePrefab != null)
-        {
+        if (movablePrefab != null) {
+            initalPosition = startPosition;
             startPosition.z = -1;
             GameObject newMovable = Instantiate(movablePrefab, startPosition, Quaternion.identity);
             newMovable.GetComponent<MovingObjectController>().enabled = true; // Enable the script
             newMovable.GetComponent<Collider2D>().enabled = true;
             newMovable.GetComponent<MovingObjectController>().InitializeMovement();
             movablePrefab = newMovable;
+            if (fixing) {
+                movablePrefab.GetComponent<MovingObjectController>().fixing = true;
+            }
         }
     }
 
@@ -48,11 +39,15 @@ public class MiniGame2Manager : MonoBehaviour
     public void BoundaryDestroyed()
     {
         boundariesDestroyed++;
-        if (boundariesDestroyed >= 2) // Assuming there are only two boundaries
+        if (boundariesDestroyed == 2) // Assuming there are only two boundaries
         {
             // Make the main part fall or change state
             StartCoroutine(MakeMainPartFall());
+            fixing = true;
+        } else if (boundariesDestroyed == 4 && fixing) {
+            Debug.Log("WIN");
             movablePrefab = null;
+            fixing = false;
         }
     }
 
@@ -66,7 +61,6 @@ public class MiniGame2Manager : MonoBehaviour
     {
         float duration = 3f; // Duration in seconds the part should fall
         float elapsed = 0f; // Time elapsed since the start of the fall
-        Vector2 repairPosition = mainPart.transform.position; // Store the repair position
 
         while (elapsed < duration && mainPart != null)
         {
@@ -91,12 +85,13 @@ public class MiniGame2Manager : MonoBehaviour
         // for each child object of boundary, set the sprite render color to green
         foreach (Transform child in leftBoundary.transform)
         {
+            if (child.gameObject.name == "base") continue;
             child.GetComponent<SpriteRenderer>().color = Color.green;
         }
         foreach (Transform child in rightBoundary.transform)
         {
+            if (child.gameObject.name == "base") continue;
             child.GetComponent<SpriteRenderer>().color = Color.green;
         }
-        
     }
 }

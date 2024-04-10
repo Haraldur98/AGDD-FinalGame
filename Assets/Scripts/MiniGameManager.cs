@@ -13,10 +13,11 @@ public class MiniGameManager : MonoBehaviour
     public bool timerIsRunning = false;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI cashText;
+    public StartMiniGame startMiniGame;
     public int score = 2000;
     private float timeToDisplay = 0;
     private float scoreDecrementTimer = 0f;
-
+    private GameManager gameManager;
 
     int totalPipes = 0;
     float[] rotations = { 0, 90, 180, 270 };
@@ -27,6 +28,7 @@ public class MiniGameManager : MonoBehaviour
         totalPipes = pipeHolder.transform.childCount;
         endPipe = endPipeGameObject.GetComponent<MiniGameUnoPipe>();
         pipes = new GameObject[totalPipes];
+        gameManager = FindObjectOfType<GameManager>();
 
         // Initialize pipes with random rotations
         for (int i = 0; i < pipes.Length; i++)
@@ -45,15 +47,22 @@ public class MiniGameManager : MonoBehaviour
         {
             Debug.Log("BINGO");
             timerIsRunning = false; // Stop the timer when the game ends
+            gameManager.AddCoins(score);
+            gameManager.isInMiniGAme = false;
+            startMiniGame.SetIsActive(false);
+            endPipe.hasWater = false;
+            score = 0;
+            timeToDisplay = 0;
+            scoreDecrementTimer = 0f;
         }
 
         if (timerIsRunning)
         {
             timeToDisplay += Time.deltaTime; // Ensure the last second is counted
 
-            float minutes = Mathf.FloorToInt(timeToDisplay / 60); 
-            float seconds = Mathf.FloorToInt(timeToDisplay % 60); 
-        
+            float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+            float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
             // Update the display text
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
             scoreDecrementTimer += Time.deltaTime;

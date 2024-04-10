@@ -8,6 +8,7 @@ public class WarningSignSpawner : MonoBehaviour
 {
     public GameObject warningSignPrefab;
     private GameObject[] warningSigns;
+    public ArrowSpawner arrowSpawner;
     private readonly List<Vector3> posForMiniGameOne = new();
     private readonly List<Vector3> posForMiniGameTwo = new();
     // add if beil on beiling on minigame 3
@@ -27,7 +28,8 @@ public class WarningSignSpawner : MonoBehaviour
             WarningSign warningSign = signObject.GetComponent<WarningSign>();
             warningSign.SetMinigame(1);
             warningSign.SetLevel(i);
-
+            warningSign.SetArrowSpawner(arrowSpawner);
+            warningSign.SetIndex(i);
         }
 
         for (int i = 0; i < posForMiniGameTwo.Count; i++)
@@ -36,6 +38,8 @@ public class WarningSignSpawner : MonoBehaviour
             WarningSign warningSign = signObject.GetComponent<WarningSign>();
             warningSign.SetMinigame(2);
             warningSign.SetLevel(i);
+            warningSign.SetArrowSpawner(arrowSpawner);
+            warningSign.SetIndex(i + posForMiniGameOne.Count);
         }
     }
 

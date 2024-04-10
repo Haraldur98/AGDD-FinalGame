@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WarningSign : MonoBehaviour
 {
+    private ArrowSpawner arrowSpawner;
+    private int index;
     private GameManager gameManager;
     private bool isInRange;
     private int signMiniGame;
@@ -24,9 +26,10 @@ public class WarningSign : MonoBehaviour
     {
         if (isInRange)
         {
-            string sceneString = signMiniGame == 1 ? "MiniGameUNO" : (signMiniGame == 2 ? "minigame2" : "SKRAAH USA USA USA");
             // TODO: get signLevel into scenes
-            gameManager.LoadMiniGame(sceneString);
+            gameManager.LoadMiniGame(signMiniGame, signLevel);
+            arrowSpawner.RemoveArrow(index);
+            Destroy(gameObject);
         }
     }
 
@@ -48,5 +51,15 @@ public class WarningSign : MonoBehaviour
     public void SetLevel(int level)
     {
         signLevel = level;
+    }
+
+    public void SetArrowSpawner(ArrowSpawner arSpawner)
+    {
+        arrowSpawner = arSpawner;
+    }
+
+    public void SetIndex(int idx)
+    {
+        index = idx;
     }
 }

@@ -9,13 +9,18 @@ public class ArrowController : MonoBehaviour
     private Camera mainCamera;
     private GameObject warningSign;
     private bool isActive;
+    private GameManager gameManager;
+
     void Start()
     {
         mainCamera = Camera.main;
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
     {
+        if (gameManager.isInMiniGAme) return;
+
         if (warningSign != null)
         {
             Vector3 direction = warningSign.transform.position - transform.position;
@@ -51,14 +56,20 @@ public class ArrowController : MonoBehaviour
 
     public bool CheckIfOffCamera()
     {
+        if (warningSign == null || mainCamera == null) return false;
         Vector3 warningSignScreenPoint = mainCamera.WorldToScreenPoint(warningSign.transform.position);
         return warningSignScreenPoint.x <= borderPadding || warningSignScreenPoint.x >= Screen.width - borderPadding || warningSignScreenPoint.y <= borderPadding || warningSignScreenPoint.y >= Screen.height - borderPadding;
     }
 
     public void SetActive(bool active)
     {
+        // Check if the arrowGameObject is null or has been destroyed
+        if (arrowGameObject == null || !arrowGameObject.activeSelf)
+            return;
+
         arrowGameObject.SetActive(active);
     }
+
 
     public bool GetActive()
     {
