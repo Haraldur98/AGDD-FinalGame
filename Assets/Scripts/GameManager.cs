@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public Slider timeSlider; // Reference to the slider
     public TextMeshProUGUI coinText; // Reference to the TextMeshPro text
     public int[] currentLevelsMiniGames = new int[3] { 0, 0, 0 };
+    public GameObject miniGameOne;
+    public GameObject miniGameTwo;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
     public void LoadMiniGame(string sceneName)
     {
 
-        SceneManager.LoadScene(sceneName);
+        
     }
 
     // Method to increase the number of coins
