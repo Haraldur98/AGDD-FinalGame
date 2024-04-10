@@ -6,16 +6,15 @@ public class MovingObjectController : MonoBehaviour
 {
     public float speed; // Speed of the movement
     private bool movingRight = true; // Direction of movement
-    public bool stopped = true;
+    public bool stopped = false;
     private bool isInBounds = false; // Flag to check if in bounds
     public float leftBound = -5.0f; // Left boundary of the movement
     public float rightBound = 5.0f; // Right boundary of the movement
     private Vector3 startPosition; // Store the start position
-    // Get camera
     public Camera mainCamera;
     private MiniGame2Manager gameManager;
-
     private GameObject currentBoundary; // Store the current collided boundary object
+    public bool fixing = false;
 
     void Start()
     {
@@ -70,17 +69,25 @@ public class MovingObjectController : MonoBehaviour
 
         if (stopped && isInBounds && currentBoundary != null)
         {
-            // Destroy the boundary object and its parent
-            // Destroy(currentBoundary.transform.parent.gameObject);
             currentBoundary.transform.parent.gameObject.SetActive(false);
             gameManager.BoundaryDestroyed(); // Notify the GameManager
-            Destroy(gameObject); // Destroy this movable object
+            Destroy(gameObject); 
             gameManager.SpawnNewMovable(startPosition);
-        } else {
-            
-            Destroy(gameObject); // Destroy this movable object
+        } else if (stopped && isInBounds && currentBoundary == null && fixing)
+        {
+            foreach (Transform child in currentBoundary.transform)
+            {
+                if (child.gameObject.name == "base") continue;
+                Destroy(child.gameObject);
+            }
+            currentBoundary.GetComponent<BoxCollider2D>().enabled = false;
+            gameManager.BoundaryDestroyed();
+            Destroy(gameObject); 
+            gameManager.SpawnNewMovable(startPosition);
+
+        } else { // Does not hit the boundary
+            Destroy(gameObject); 
             mainCamera.GetComponent<ScreenShake>().isShaking = true;
-            Debug.Log("Spawn new movable object");
             gameManager.SpawnNewMovable(startPosition);
             gameManager.decrementScore();
         }
