@@ -198,8 +198,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: right click to pull it out
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
-  m_sharedMaterial: {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 58a42fbf9d215c647a900186930df491, type: 2}
+  m_sharedMaterial: {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -288,7 +288,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  - {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -369,8 +369,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'the arrows point to the signs '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
-  m_sharedMaterial: {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 58a42fbf9d215c647a900186930df491, type: 2}
+  m_sharedMaterial: {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -459,7 +459,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  - {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -47186,8 +47186,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'your ladder '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
-  m_sharedMaterial: {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 58a42fbf9d215c647a900186930df491, type: 2}
+  m_sharedMaterial: {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -47276,7 +47276,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  - {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -47476,8 +47476,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'adjust the hight with the scrool wheel '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
-  m_sharedMaterial: {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 58a42fbf9d215c647a900186930df491, type: 2}
+  m_sharedMaterial: {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -47566,7 +47566,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  - {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81321,9 +81321,14 @@ MonoBehaviour:
   timerText: {fileID: 0}
   cashText: {fileID: 0}
   score: 2000
+  decrement: 0
+  cashSlider: {fileID: 0}
   onMiniGameEnd:
     m_PersistentCalls:
       m_Calls: []
+  miniGameCamera: {fileID: 0}
+  mainCameraPos: {x: 0, y: 0, z: 0}
+  difficulty: 0
 --- !u!4 &934556188
 Transform:
   m_ObjectHideFlags: 0
@@ -81389,6 +81394,7 @@ MonoBehaviour:
   currentLevelsMiniGames: 000000000000000000000000
   miniGameOne: {fileID: 0}
   miniGameTwo: {fileID: 0}
+  mainCamera: {fileID: 0}
 --- !u!1 &942305829
 GameObject:
   m_ObjectHideFlags: 0
@@ -81448,8 +81454,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
-  m_sharedMaterial: {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 58a42fbf9d215c647a900186930df491, type: 2}
+  m_sharedMaterial: {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -81538,7 +81544,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  - {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88106,8 +88112,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Now get to work !
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
-  m_sharedMaterial: {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 58a42fbf9d215c647a900186930df491, type: 2}
+  m_sharedMaterial: {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -88196,7 +88202,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  - {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88277,8 +88283,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'left click to place it '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
-  m_sharedMaterial: {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 58a42fbf9d215c647a900186930df491, type: 2}
+  m_sharedMaterial: {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -88367,7 +88373,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  - {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88448,8 +88454,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: right click to pick it up when close to your placed ladder
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
-  m_sharedMaterial: {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 58a42fbf9d215c647a900186930df491, type: 2}
+  m_sharedMaterial: {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -88538,7 +88544,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  - {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91674,8 +91680,8 @@ MonoBehaviour:
   m_text: 'Now get down to the sewers and fix as much as you can before the day is
     ower '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
-  m_sharedMaterial: {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 58a42fbf9d215c647a900186930df491, type: 2}
+  m_sharedMaterial: {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -91764,7 +91770,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  - {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91983,8 +91989,8 @@ MonoBehaviour:
   m_text: your ladder is your best friend down in the sewers so rememer to pick it
     upp you only have one !!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
-  m_sharedMaterial: {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 58a42fbf9d215c647a900186930df491, type: 2}
+  m_sharedMaterial: {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92073,7 +92079,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  - {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92268,8 +92274,8 @@ MonoBehaviour:
   m_text: Find Warning signs they indecate that somthing needs fixing. click them
     to start fixing
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
-  m_sharedMaterial: {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 58a42fbf9d215c647a900186930df491, type: 2}
+  m_sharedMaterial: {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92358,7 +92364,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3102404698335501256, guid: 1df2ab45d1b313c439d9e3b8d4618c4b, type: 2}
+  - {fileID: -5788509556655924094, guid: 58a42fbf9d215c647a900186930df491, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
