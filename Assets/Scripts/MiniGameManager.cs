@@ -21,9 +21,12 @@ public class MiniGameManager : MonoBehaviour
     public Slider cashSlider;
 
     public UnityEvent onMiniGameEnd;
+    public Camera miniGameCamera;
 
+    public Vector3 mainCameraPos;
     int totalPipes = 0;
     float[] rotations = { 0, 90, 180, 270 };
+    StartMiniGame startMiniGame;
 
     IEnumerator Start()
     {
@@ -32,6 +35,8 @@ public class MiniGameManager : MonoBehaviour
         endPipe = endPipeGameObject.GetComponent<MiniGameUnoPipe>();
         pipes = new GameObject[totalPipes];
         cashSlider.maxValue = score;
+
+        startMiniGame = GameObject.FindObjectOfType<StartMiniGame>();
 
         // Initialize pipes with random rotations
         for (int i = 0; i < pipes.Length; i++)
@@ -42,6 +47,11 @@ public class MiniGameManager : MonoBehaviour
         }
         yield return null;
         PropagateWater();
+
+        Transform miniGameHolder = gameObject.transform.parent;
+        miniGameHolder.transform.position = new Vector3(mainCameraPos.x - 0.354f, mainCameraPos.y - 0.444f, -1);
+        GameObject miniGameCamera = GameObject.Find("MiniGameUNOCamera");
+        miniGameCamera.transform.position = mainCameraPos;
     }
     public void adjustScore()
     {
@@ -74,7 +84,7 @@ public class MiniGameManager : MonoBehaviour
             timerIsRunning = false; // Stop the timer when the game ends
 
             // Trigger the onMiniGameEnd event
-            onMiniGameEnd?.Invoke();
+            startMiniGame.onMiniGameEnd?.Invoke();
         }
 
         if (timerIsRunning)

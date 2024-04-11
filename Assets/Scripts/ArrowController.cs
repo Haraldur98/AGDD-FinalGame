@@ -51,6 +51,7 @@ public class ArrowController : MonoBehaviour
 
     public bool CheckIfOffCamera()
     {
+        if (mainCamera == null || warningSign == null) return false; 
         Vector3 warningSignScreenPoint = mainCamera.WorldToScreenPoint(warningSign.transform.position);
         return warningSignScreenPoint.x <= borderPadding || warningSignScreenPoint.x >= Screen.width - borderPadding || warningSignScreenPoint.y <= borderPadding || warningSignScreenPoint.y >= Screen.height - borderPadding;
     }

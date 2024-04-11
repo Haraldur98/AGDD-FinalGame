@@ -26,7 +26,7 @@ public class WarningSign : MonoBehaviour
         {
             string sceneString = signMiniGame == 1 ? "MiniGameUNO" : (signMiniGame == 2 ? "minigame2" : "SKRAAH USA USA USA");
             // TODO: get signLevel into scenes
-            gameManager.LoadMiniGame(sceneString);
+            gameManager.LoadMiniGame(sceneString, signLevel);
             Destroy(gameObject);
         }
     }
