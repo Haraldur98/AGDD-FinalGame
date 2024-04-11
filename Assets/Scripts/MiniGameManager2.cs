@@ -125,16 +125,5 @@ public class MiniGame2Manager : MonoBehaviour
         leftBoundary.SetActive(true);
         rightBoundary.SetActive(true);
         
-        // for each child object of boundary, set the sprite render color to green
-        foreach (Transform child in leftBoundary.transform)
-        {
-            if (child.gameObject.name == "base") continue;
-            child.GetComponent<SpriteRenderer>().color = Color.green;
-        }
-        foreach (Transform child in rightBoundary.transform)
-        {
-            if (child.gameObject.name == "base") continue;
-            child.GetComponent<SpriteRenderer>().color = Color.green;
-        }
     }
 }
