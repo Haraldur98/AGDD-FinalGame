@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MiniGameManager : MonoBehaviour
 {
@@ -14,14 +16,19 @@ public class MiniGameManager : MonoBehaviour
     public bool timerIsRunning = false;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI cashText;
-    public int score = 2000;
-    private float timeToDisplay = 0;
+    public int score;
+    public int decrement;
+    private float timeToDisplay;
     private float scoreDecrementTimer = 0f;
-
+    public Slider cashSlider;
     public UnityEvent onMiniGameEnd;
+    public Camera miniGameCamera;
 
+    public Vector3 mainCameraPos;
     int totalPipes = 0;
     float[] rotations = { 0, 90, 180, 270 };
+    public int difficulty;
+    StartMiniGame startMiniGame;
 
     IEnumerator Start()
     {
@@ -29,7 +36,10 @@ public class MiniGameManager : MonoBehaviour
         totalPipes = pipeHolder.transform.childCount;
         endPipe = endPipeGameObject.GetComponent<MiniGameUnoPipe>();
         pipes = new GameObject[totalPipes];
-
+        startMiniGame = GameObject.FindObjectOfType<StartMiniGame>();
+        difficulty = startMiniGame.difficulty;
+        adjustScore();
+        cashSlider.maxValue = score / decrement;
         // Initialize pipes with random rotations
         for (int i = 0; i < pipes.Length; i++)
         {
@@ -39,6 +49,33 @@ public class MiniGameManager : MonoBehaviour
         }
         yield return null;
         PropagateWater();
+
+        Transform miniGameHolder = gameObject.transform.parent;
+        miniGameHolder.transform.position = new Vector3(mainCameraPos.x - 0.354f, mainCameraPos.y - 0.444f, -1);
+        GameObject miniGameCamera = GameObject.Find("MiniGameUNOCamera");
+        miniGameCamera.transform.position = mainCameraPos;
+    }
+    public void adjustScore()
+    {
+        switch (difficulty)
+        {
+            case 1:
+                score = 1000;
+                decrement = 20;
+                break;
+            case 2:
+                score = 2000;
+                decrement = 50;
+                break;
+            case 3:
+                score = 4000;
+                decrement = 100;
+                break;
+            default:
+                score = 1000;
+                decrement = 20;
+                break;
+        }
     }
 
     private void Update()
@@ -49,25 +86,23 @@ public class MiniGameManager : MonoBehaviour
             timerIsRunning = false; // Stop the timer when the game ends
 
             // Trigger the onMiniGameEnd event
-            onMiniGameEnd?.Invoke();
+            startMiniGame.onMiniGameEnd?.Invoke();
         }
 
         if (timerIsRunning)
-        {
-            timeToDisplay += Time.deltaTime; // Ensure the last second is counted
-
-            float minutes = Mathf.FloorToInt(timeToDisplay / 60); 
-            float seconds = Mathf.FloorToInt(timeToDisplay % 60); 
-        
-            // Update the display text
-            timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        {   
+            // Ensure the last second is counted
+            // decrement score every second:
             scoreDecrementTimer += Time.deltaTime;
-            if (scoreDecrementTimer >= 5f) // Every 5 seconds
+            timeToDisplay += Time.deltaTime;
+            cashSlider.value = timeToDisplay;
+            if (scoreDecrementTimer >= 1)
             {
-                score -= 100; // Decrement score
-                cashText.text = "Cash for job: " + score + "$"; // Update the score display
-                scoreDecrementTimer = 0f; // Reset the timer
+                score -= decrement;
+                cashText.text = "<color=green>$</color>:" + score;
             }
+            
+
         }
     }
 
