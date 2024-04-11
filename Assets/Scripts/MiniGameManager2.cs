@@ -13,10 +13,51 @@ public class MiniGame2Manager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public GameObject tutorialPanel;
     public int score;
+    public int decrement;
     public GameObject leftBoundary;
     public GameObject rightBoundary;
     private Vector3 initalPosition;
     private bool fixing = false;
+    private bool lost = false;
+    public int difficulty;
+
+    void Awake()
+    {
+        adjustScore();
+        scoreText.text = "Cash for job: " + score + "$";
+    }
+
+    void Update() {
+        if (score <= 0 && !lost) {
+            movablePrefab = null;
+            fixing = false;
+            lost = true;
+            Destroy(movablePrefab);
+        }
+    }
+
+    public void adjustScore()
+    {
+        switch (difficulty)
+        {
+            case 1:
+                score = 1000;
+                decrement = 50;
+                break;
+            case 2:
+                score = 3000;
+                decrement = 100;
+                break;
+            case 3:
+                score = 5000;
+                decrement = 300;
+                break;
+            default:
+                score = 1000;
+                decrement = 50;
+                break;
+        }
+    }
 
     public void SpawnNewMovable(Vector3 startPosition)
     {
@@ -27,8 +68,8 @@ public class MiniGame2Manager : MonoBehaviour
             GameObject newMovable = Instantiate(movablePrefab, startPosition, Quaternion.identity);
             newMovable.GetComponent<MovingObjectController>().enabled = true; // Enable the script
             newMovable.GetComponent<Collider2D>().enabled = true;
-            newMovable.GetComponent<MovingObjectController>().InitializeMovement();
             movablePrefab = newMovable;
+            newMovable.GetComponent<MovingObjectController>().InitializeMovement();
             if (fixing) {
                 movablePrefab.GetComponent<MovingObjectController>().fixing = true;
             }
@@ -45,7 +86,6 @@ public class MiniGame2Manager : MonoBehaviour
             StartCoroutine(MakeMainPartFall());
             fixing = true;
         } else if (boundariesDestroyed == 4 && fixing) {
-            Debug.Log("WIN");
             movablePrefab = null;
             fixing = false;
         }
@@ -53,7 +93,7 @@ public class MiniGame2Manager : MonoBehaviour
 
     public void decrementScore()
     {
-        score -= 100;
+        score -= decrement;
         scoreText.text = "Cash for job: " + score + "$";
     }
 
@@ -73,7 +113,6 @@ public class MiniGame2Manager : MonoBehaviour
         }
         Destroy(mainPart);
         // Destroy the main part after falling for the duration
-        Debug.Log("Main part destroyed");
         fixedPartPrefab.GetComponent<FloatToPosition>().InitializeMovement();
     }
 
