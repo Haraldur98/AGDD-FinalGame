@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WarningSign : MonoBehaviour
@@ -14,6 +15,20 @@ public class WarningSign : MonoBehaviour
     private int signLevel;
     private string gameName;
     public int potentialCash;
+    // Dictionary with key as signLevel and value potential cash
+    public static Dictionary<int, int> FixPipeScores = new Dictionary<int, int>
+    {
+        { 1, 1000 },
+        { 2, 3000 },
+        { 3, 5000 }
+    };
+    public static Dictionary<int, int> FlowPipeScores = new Dictionary<int, int>
+    {
+        { 1, 1000 },
+        { 2, 2000 },
+        { 3, 4000 }
+    };
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,10 +83,29 @@ public class WarningSign : MonoBehaviour
     private void AddName() 
     {
         if (signMiniGame == 1) {
-            gameInfoPanelInstance.transform.Find("MiniGameName").GetComponent<TextMeshPro>().text = "Flow Pipe";
+            gameName = "Flow Pipe";
         } else {
-            gameInfoPanelInstance.transform.Find("MiniGameName").GetComponent<TextMeshPro>().text = "Fix Pipe";
+            gameName = "Fix Pipe";
         }
+        gameInfoPanelInstance.transform.Find("MiniGameName").GetComponent<TextMeshPro>().text = gameName;
+    }
+    private void AddCash() 
+    {
+        if (signMiniGame == 1)  // Assuming 1 is for Flow Pipe
+        {
+            if (FlowPipeScores.TryGetValue(signLevel, out int flowCash))
+            {
+                potentialCash = flowCash;
+            }
+        }
+        else if (signMiniGame == 2)  // Assuming 2 is for Fix Pipe
+        {
+            if (FixPipeScores.TryGetValue(signLevel, out int fixCash))
+            {
+                potentialCash = fixCash;
+            }
+        }
+        gameInfoPanelInstance.transform.Find("MiniGameCash").GetComponent<TextMeshPro>().text = "<color=green>$</color>:" + potentialCash;
     }
 
     private void UpdateInfoText()
@@ -79,7 +113,7 @@ public class WarningSign : MonoBehaviour
         Debug.Log(gameInfoPanelInstance);
         // Assuming each text component's tag or name is set to identify them
         gameInfoPanelInstance.transform.Find("MiniGameLevel").GetComponent<TextMeshPro>().text = "Level: " + signLevel.ToString();
-        gameInfoPanelInstance.transform.Find("MiniGameCash").GetComponent<TextMeshPro>().text = "$" + potentialCash.ToString();
+        AddCash();
         AddName();
     }
 
