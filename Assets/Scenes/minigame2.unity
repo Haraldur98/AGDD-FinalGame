@@ -289,6 +289,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1318705394088243273, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -34.30005
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843142301922066003, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843142301922066003, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737421379557435498, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: score
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737421379557435498, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: difficulty
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630263198169152226, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630263198169152226, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830260387752533442, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: stopped
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4830260387752533442, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: mainCamera
       value: 
@@ -333,9 +365,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4928562597066784959, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_Creator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4928562597066784959, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_SpriteShape
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5559325782334643282, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: m_Name
       value: MiniGame2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934204791498743931, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934204791498743931, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6505149613699000795, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_Creator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6505149613699000795, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_SpriteShape
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
