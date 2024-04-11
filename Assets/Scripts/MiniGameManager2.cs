@@ -22,6 +22,7 @@ public class MiniGame2Manager : MonoBehaviour
     private bool lost = false;
     public int difficulty;
     public Vector3 mainCameraPos;
+    public UnityEvent onMiniGameEnd;
 
     void Awake()
     {
@@ -61,7 +62,6 @@ public class MiniGame2Manager : MonoBehaviour
         }
     }
 
-    public UnityEvent onMiniGameEnd;
 
     public void SpawnNewMovable(Vector3 startPosition)
     {

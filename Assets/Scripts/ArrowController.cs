@@ -9,13 +9,17 @@ public class ArrowController : MonoBehaviour
     private Camera mainCamera;
     private GameObject warningSign;
     private bool isActive;
+
     void Start()
     {
         mainCamera = Camera.main;
     }
 
     void Update()
-    {
+    {   
+
+        
+
         if (warningSign != null)
         {
             Vector3 direction = warningSign.transform.position - transform.position;

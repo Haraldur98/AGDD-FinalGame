@@ -210,7 +210,7 @@ Transform:
   m_GameObject: {fileID: 600190418}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -339,7 +339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885778542779818777, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.40881705
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4885778542779818777, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -387,7 +387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5934204791498743931, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6505149613699000795, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: m_Creator
@@ -396,6 +396,14 @@ PrefabInstance:
     - target: {fileID: 6505149613699000795, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: m_SpriteShape
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7584788670280022917, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426511378072252556, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

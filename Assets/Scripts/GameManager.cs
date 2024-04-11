@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     private int currentLevel;
 
     public bool isInMiniGame;
-
+    public bool isTimeRunning;
     // Start is called before the first frame update
     void Start()
     {
@@ -106,7 +106,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void EndMiniGame(string miniGameSceneName)
-    {
+    {   
+        isInMiniGame = false;
         // Unload the mini-game scene
         SceneManager.UnloadSceneAsync(miniGameSceneName);
     }
