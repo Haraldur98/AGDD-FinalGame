@@ -18,10 +18,10 @@ public class MiniGameManager : MonoBehaviour
     public int decrement;
     private float timeToDisplay = 0;
     private float scoreDecrementTimer = 0f;
-    public Slider cashSlider;
+    //TODO: uncomment before push
+    // public Slider cashSlider;
 
     public UnityEvent onMiniGameEnd;
-    public Camera miniGameCamera;
 
     public Vector3 mainCameraPos;
     int totalPipes = 0;
@@ -34,7 +34,8 @@ public class MiniGameManager : MonoBehaviour
         totalPipes = pipeHolder.transform.childCount;
         endPipe = endPipeGameObject.GetComponent<MiniGameUnoPipe>();
         pipes = new GameObject[totalPipes];
-        cashSlider.maxValue = score;
+        //TODO: uncomment before push
+        // cashSlider.maxValue = score;
 
         startMiniGame = GameObject.FindObjectOfType<StartMiniGame>();
 
@@ -55,25 +56,26 @@ public class MiniGameManager : MonoBehaviour
     }
     public void adjustScore()
     {
-        switch (difficulty)
-        {
-            case 1:
-                score = 1000;
-                decrement = 20;
-                break;
-            case 2:
-                score = 2000;
-                decrement = 50;
-                break;
-            case 3:
-                score = 4000;
-                decrement = 100;
-                break;
-            default:
-                score = 1000;
-                decrement = 20;
-                break;
-        }
+        //TODO: uncomment before push
+        // switch (difficulty)
+        // {
+        //     case 1:
+        //         score = 1000;
+        //         decrement = 20;
+        //         break;
+        //     case 2:
+        //         score = 2000;
+        //         decrement = 50;
+        //         break;
+        //     case 3:
+        //         score = 4000;
+        //         decrement = 100;
+        //         break;
+        //     default:
+        //         score = 1000;
+        //         decrement = 20;
+        //         break;
+        // }
     }
 
     private void Update()

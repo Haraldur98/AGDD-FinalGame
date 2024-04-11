@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour
         {
             // Find the MiniGameManager in the loaded scene
             MiniGame2Manager miniGameManager2 = GameObject.FindObjectOfType<MiniGame2Manager>();
+            Debug.Log("AM HERE:" + mainCamera.transform.position);
+            miniGameManager2.mainCameraPos = mainCamera.transform.position;
 
             // Subscribe to the onMiniGameEnd event
             miniGameManager2.onMiniGameEnd.AddListener(() => EndMiniGame(scene.name));
