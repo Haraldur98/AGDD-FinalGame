@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 600190419}
   - component: {fileID: 600190422}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MiniGameTwoCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,7 +149,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600190418}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &600190420
 Camera:
   m_ObjectHideFlags: 0
@@ -308,6 +308,10 @@ PrefabInstance:
     - target: {fileID: 3737421379557435498, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: difficulty
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055626207550927691, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4630263198169152226, guid: 4dc500b2d27e244cba3043fa4d41bd4d, type: 3}
       propertyPath: m_ShapeTexture

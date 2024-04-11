@@ -21,11 +21,20 @@ public class MiniGame2Manager : MonoBehaviour
     private bool fixing = false;
     private bool lost = false;
     public int difficulty;
+    public Vector3 mainCameraPos;
 
     void Awake()
     {
         adjustScore();
         scoreText.text = "Cash for job: " + score + "$";
+    }
+
+    void Start() {
+        Debug.Log("MOEW: " + mainCameraPos);
+        GameObject miniGameCamera = GameObject.Find("MiniGameTwoCamera");
+        miniGameCamera.transform.position = mainCameraPos;
+        Transform miniGameHolder = gameObject.transform.parent;
+        miniGameHolder.transform.position = new Vector3(mainCameraPos.x, mainCameraPos.y, -1);
     }
 
     void Update() {

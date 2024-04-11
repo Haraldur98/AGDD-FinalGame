@@ -22,7 +22,6 @@ public class MiniGameManager : MonoBehaviour
     private float scoreDecrementTimer = 0f;
     public Slider cashSlider;
     public UnityEvent onMiniGameEnd;
-    public Camera miniGameCamera;
 
     public Vector3 mainCameraPos;
     int totalPipes = 0;
@@ -39,7 +38,6 @@ public class MiniGameManager : MonoBehaviour
         startMiniGame = GameObject.FindObjectOfType<StartMiniGame>();
         difficulty = startMiniGame.difficulty;
         adjustScore();
-        cashSlider.maxValue = score / decrement;
         // Initialize pipes with random rotations
         for (int i = 0; i < pipes.Length; i++)
         {
@@ -59,21 +57,30 @@ public class MiniGameManager : MonoBehaviour
     {
         switch (difficulty)
         {
+            case 0:
+                score = 0;
+                decrement = 0;
+                cashSlider.maxValue = 0;
+                break;
             case 1:
                 score = 1000;
                 decrement = 20;
+                cashSlider.maxValue = score / decrement;
                 break;
             case 2:
                 score = 2000;
                 decrement = 50;
+                cashSlider.maxValue = score / decrement;
                 break;
             case 3:
                 score = 4000;
                 decrement = 100;
+                cashSlider.maxValue = score / decrement;
                 break;
             default:
                 score = 1000;
                 decrement = 20;
+                cashSlider.maxValue = score / decrement;
                 break;
         }
     }
