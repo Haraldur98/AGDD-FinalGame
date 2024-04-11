@@ -14,9 +14,11 @@ public class MiniGameManager : MonoBehaviour
     public bool timerIsRunning = false;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI cashText;
-    public int score = 2000;
+    public int score;
+    public int decrement;
     private float timeToDisplay = 0;
     private float scoreDecrementTimer = 0f;
+    public Slider cashSlider;
 
     public UnityEvent onMiniGameEnd;
     public Camera miniGameCamera;
@@ -32,6 +34,7 @@ public class MiniGameManager : MonoBehaviour
         totalPipes = pipeHolder.transform.childCount;
         endPipe = endPipeGameObject.GetComponent<MiniGameUnoPipe>();
         pipes = new GameObject[totalPipes];
+        cashSlider.maxValue = score;
 
         startMiniGame = GameObject.FindObjectOfType<StartMiniGame>();
 
@@ -50,6 +53,28 @@ public class MiniGameManager : MonoBehaviour
         GameObject miniGameCamera = GameObject.Find("MiniGameUNOCamera");
         miniGameCamera.transform.position = mainCameraPos;
     }
+    public void adjustScore()
+    {
+        switch (difficulty)
+        {
+            case 1:
+                score = 1000;
+                decrement = 20;
+                break;
+            case 2:
+                score = 2000;
+                decrement = 50;
+                break;
+            case 3:
+                score = 4000;
+                decrement = 100;
+                break;
+            default:
+                score = 1000;
+                decrement = 20;
+                break;
+        }
+    }
 
     private void Update()
     {
@@ -66,18 +91,6 @@ public class MiniGameManager : MonoBehaviour
         {
             timeToDisplay += Time.deltaTime; // Ensure the last second is counted
 
-            float minutes = Mathf.FloorToInt(timeToDisplay / 60); 
-            float seconds = Mathf.FloorToInt(timeToDisplay % 60); 
-        
-            // Update the display text
-            timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-            scoreDecrementTimer += Time.deltaTime;
-            if (scoreDecrementTimer >= 5f) // Every 5 seconds
-            {
-                score -= 100; // Decrement score
-                cashText.text = "Cash for job: " + score + "$"; // Update the score display
-                scoreDecrementTimer = 0f; // Reset the timer
-            }
         }
     }
 
