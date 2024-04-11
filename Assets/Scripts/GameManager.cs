@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public bool isInMiniGame;
     public bool isTimeRunning;
     // Start is called before the first frame update
+    public GameObject whereToSpawn;
     void Start()
     {
         time = gameDuration ;
@@ -29,8 +30,17 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Score", 0); // Initialize the player's score
         coinText.text = "<color=green>$</color>:" + coins; // Initialize the text
 
+
         // Subscribe to the onMiniGameEnd event
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // check if user wants tutorial
+        bool tutorial = PlayerPrefs.GetInt("Tutorial", 0) == 1;
+
+        if (tutorial)
+        {
+            whereToSpawn.transform.position = new Vector3(-30f, 9.5f, 0.4f);
+        }
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -66,17 +76,27 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Increment the time by the time since the last frame
-         time -= Time.deltaTime;
+        if (isTimeRunning) 
+        {
+            time -= Time.deltaTime;
+        }
 
-        if (time < 30)
+        if (time < 60)
         {
             // warning text to show the player that the game is about to end
+             digitalClock.color = new Color(1.0f, 0.5f, 0.0f); // Orange color
         }
+        else if (time < 30)
+        {
+            // warning text to show the player that the game is about to end
+            digitalClock.color = Color.red;
+        }
+    
 
         if (time < 0)
         {
-            time = 0;
             EndGame();
+            time = 0;
         }
 
         // Update the digital clock's text

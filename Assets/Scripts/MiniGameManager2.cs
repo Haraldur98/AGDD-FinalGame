@@ -68,7 +68,7 @@ public class MiniGame2Manager : MonoBehaviour
         // add z position to the start position
         if (movablePrefab != null) {
             initalPosition = startPosition;
-            startPosition.z = -1;
+            startPosition.z = -4;
             GameObject newMovable = Instantiate(movablePrefab, startPosition, Quaternion.identity);
             newMovable.GetComponent<MovingObjectController>().enabled = true; // Enable the script
             newMovable.GetComponent<Collider2D>().enabled = true;

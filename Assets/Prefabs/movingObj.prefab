@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.17621231, y: 0.12654543, z: -1}
-  m_LocalScale: {x: 0.1953125, y: 7, z: -1}
+  m_LocalScale: {x: 0.1953125, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,8 +100,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  stopped: 0
   leftBound: -5
   rightBound: 5
+  mainCamera: {fileID: 0}
+  fixing: 0
 --- !u!61 &7412420765911180057
 BoxCollider2D:
   m_ObjectHideFlags: 0
