@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     public float time { get; private set; } // The current time
     public int coins { get; private set; } // The number of coins
     public float gameDuration = 20; // The duration of a month in seconds
-    public Slider timeSlider; // Reference to the slider
+    // public Slider timeSlider; // Reference to the slider
     public TextMeshProUGUI coinText; // Reference to the TextMeshPro text
+    public TextMeshProUGUI digitalClock; // Reference to the TextMeshPro text for the timer
     public int[] currentLevelsMiniGames = new int[3] { 0, 0, 0 };
     public GameObject miniGameOne;
     public GameObject miniGameTwo;
@@ -21,10 +22,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        time = 0;
+        time = gameDuration ;
         coins = 0;
         coinText.text = "<color=green>$</color>:" + coins; // Initialize the text
-        timeSlider.maxValue = gameDuration; // Initialize the slider's max value
 
         // Subscribe to the onMiniGameEnd event
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -58,15 +58,24 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Increment the time by the time since the last frame
-        time += Time.deltaTime;
-        coinText.text = "<color=green>$</color>:" + coins; // Update the text
-        timeSlider.value = time; // Update the slider's value
+         time -= Time.deltaTime;
 
-        if (time >= gameDuration)
+        if (time < 30)
         {
-            // End the game
+            // warning text to show the player that the game is about to end
+        }
+
+        if (time < 0)
+        {
+            time = 0;
             EndGame();
         }
+
+        // Update the digital clock's text
+        int minutes = (int)(time / 60);
+        int seconds = (int)(time % 60);
+        digitalClock.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
     }
 
     void EndGame()
