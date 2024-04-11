@@ -31,7 +31,7 @@ public class UImanager : MonoBehaviour
         {
             { ActionState.None, "" },
             { ActionState.PickUp, "Right click to pick up ladder" },
-            { ActionState.Climb, "Press W to climb" },
+            { ActionState.Climb, "Press W and S to climb" },
             { ActionState.Fix, "Left click to fix" },
         };
     }
@@ -40,7 +40,7 @@ public class UImanager : MonoBehaviour
     {
         // Position the action indicator above the player
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(playerTransform.position);
-        screenPosition.y += 50; // Adjust this value to position the indicator above the player
+        screenPosition.y += 60; // Adjust this value to position the indicator above the player
         screenPosition.x -= 20; // Adjust this value to position the indicator above the player
         actionIndicator.transform.position = screenPosition;
 

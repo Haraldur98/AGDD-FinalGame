@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public Camera mainCamera;
     private int currentLevel;
 
+    public bool isInMiniGame;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,18 +38,23 @@ public class GameManager : MonoBehaviour
         if (scene.name == "MiniGameUNO")
         {
             // Find the MiniGameManager in the loaded scene
+            isInMiniGame = true;
             StartMiniGame startMiniGame = GameObject.FindObjectOfType<StartMiniGame>();
             startMiniGame.StartGame(currentLevel);
             MiniGameManager miniGameManager = GameObject.FindObjectOfType<MiniGameManager>();
             miniGameManager.mainCameraPos = mainCamera.transform.position;
 
             // Subscribe to the onMiniGameEnd event
-            startMiniGame.onMiniGameEnd.AddListener(() => EndMiniGame(scene.name));
+            startMiniGame.onMiniGameEnd.AddListener(() => 
+                EndMiniGame(scene.name));
         }
         else if (scene.name == "minigame2")
         {
+            isInMiniGame = true;
             // Find the MiniGameManager in the loaded scene
             MiniGame2Manager miniGameManager2 = GameObject.FindObjectOfType<MiniGame2Manager>();
+            Debug.Log("AM HERE:" + mainCamera.transform.position);
+            miniGameManager2.mainCameraPos = mainCamera.transform.position;
 
             // Subscribe to the onMiniGameEnd event
             miniGameManager2.onMiniGameEnd.AddListener(() => EndMiniGame(scene.name));
@@ -83,7 +90,7 @@ public class GameManager : MonoBehaviour
         // Get the player's name
         string playerName = PlayerPrefs.GetString("PlayerName", "Player");
         // Save the high score
-        HighScoreManager.Instance.AddHighScore(playerName , coins);
+        // HighScoreManager.Instance.AddHighScore(playerName , coins);
          // Save the player's score
         PlayerPrefs.SetInt("Score", coins);
         // Load the end screen

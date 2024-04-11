@@ -22,7 +22,6 @@ public class MiniGameManager : MonoBehaviour
     private float scoreDecrementTimer = 0f;
     public Slider cashSlider;
     public UnityEvent onMiniGameEnd;
-    public Camera miniGameCamera;
 
     public Vector3 mainCameraPos;
     int totalPipes = 0;
@@ -85,12 +84,14 @@ public class MiniGameManager : MonoBehaviour
             Debug.Log("BINGO");
             timerIsRunning = false; // Stop the timer when the game ends
 
+            GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
+            gameManager.isInMiniGame = false;
             // Trigger the onMiniGameEnd event
             startMiniGame.onMiniGameEnd?.Invoke();
         }
 
         if (timerIsRunning)
-        {   
+        {
             // Ensure the last second is counted
             // decrement score every second:
             scoreDecrementTimer += Time.deltaTime;
@@ -101,7 +102,7 @@ public class MiniGameManager : MonoBehaviour
                 score -= decrement;
                 cashText.text = "<color=green>$</color>:" + score;
             }
-            
+
 
         }
     }

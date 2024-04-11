@@ -21,6 +21,7 @@ public class MiniGame2Manager : MonoBehaviour
     private bool fixing = false;
     private bool lost = false;
     public int difficulty;
+    public Vector3 mainCameraPos;
 
     void Awake()
     {
@@ -91,6 +92,8 @@ public class MiniGame2Manager : MonoBehaviour
         } else if (boundariesDestroyed == 4 && fixing) {
             movablePrefab = null;
             fixing = false;
+            GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
+            gameManager.isInMiniGame = false;
             onMiniGameEnd?.Invoke();
         }
     }
