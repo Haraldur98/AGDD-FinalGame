@@ -11,6 +11,7 @@ public class StartMiniGame : MonoBehaviour
     public GameObject tutorialPanel;
     public TextMeshProUGUI timerText;
     public UnityEvent onMiniGameEnd;
+    public int difficulty;
 
     void Update()
     {
@@ -24,6 +25,7 @@ public class StartMiniGame : MonoBehaviour
     public void StartGame(int level)
     {
         DisableMinigames();
+        difficulty = level;
         if (level == 0)
         {
             tutorial.SetActive(true);

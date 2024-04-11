@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MiniGameManager : MonoBehaviour
 {
@@ -16,16 +18,15 @@ public class MiniGameManager : MonoBehaviour
     public TextMeshProUGUI cashText;
     public int score;
     public int decrement;
-    private float timeToDisplay = 0;
+    private float timeToDisplay;
     private float scoreDecrementTimer = 0f;
-    //TODO: uncomment before push
-    // public Slider cashSlider;
-
+    public Slider cashSlider;
     public UnityEvent onMiniGameEnd;
 
     public Vector3 mainCameraPos;
     int totalPipes = 0;
     float[] rotations = { 0, 90, 180, 270 };
+    public int difficulty;
     StartMiniGame startMiniGame;
 
     IEnumerator Start()
@@ -34,11 +35,10 @@ public class MiniGameManager : MonoBehaviour
         totalPipes = pipeHolder.transform.childCount;
         endPipe = endPipeGameObject.GetComponent<MiniGameUnoPipe>();
         pipes = new GameObject[totalPipes];
-        //TODO: uncomment before push
-        // cashSlider.maxValue = score;
-
         startMiniGame = GameObject.FindObjectOfType<StartMiniGame>();
-
+        difficulty = startMiniGame.difficulty;
+        adjustScore();
+        cashSlider.maxValue = score / decrement;
         // Initialize pipes with random rotations
         for (int i = 0; i < pipes.Length; i++)
         {
@@ -56,26 +56,25 @@ public class MiniGameManager : MonoBehaviour
     }
     public void adjustScore()
     {
-        //TODO: uncomment before push
-        // switch (difficulty)
-        // {
-        //     case 1:
-        //         score = 1000;
-        //         decrement = 20;
-        //         break;
-        //     case 2:
-        //         score = 2000;
-        //         decrement = 50;
-        //         break;
-        //     case 3:
-        //         score = 4000;
-        //         decrement = 100;
-        //         break;
-        //     default:
-        //         score = 1000;
-        //         decrement = 20;
-        //         break;
-        // }
+        switch (difficulty)
+        {
+            case 1:
+                score = 1000;
+                decrement = 20;
+                break;
+            case 2:
+                score = 2000;
+                decrement = 50;
+                break;
+            case 3:
+                score = 4000;
+                decrement = 100;
+                break;
+            default:
+                score = 1000;
+                decrement = 20;
+                break;
+        }
     }
 
     private void Update()
@@ -90,8 +89,18 @@ public class MiniGameManager : MonoBehaviour
         }
 
         if (timerIsRunning)
-        {
-            timeToDisplay += Time.deltaTime; // Ensure the last second is counted
+        {   
+            // Ensure the last second is counted
+            // decrement score every second:
+            scoreDecrementTimer += Time.deltaTime;
+            timeToDisplay += Time.deltaTime;
+            cashSlider.value = timeToDisplay;
+            if (scoreDecrementTimer >= 1)
+            {
+                score -= decrement;
+                cashText.text = "<color=green>$</color>:" + score;
+            }
+            
 
         }
     }
