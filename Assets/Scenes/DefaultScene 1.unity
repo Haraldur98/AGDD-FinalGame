@@ -72602,6 +72602,9 @@ MonoBehaviour:
   timeSlider: {fileID: 1839560466}
   coinText: {fileID: 1750856543}
   currentLevelsMiniGames: 000000000000000000000000
+  miniGameOne: {fileID: 0}
+  miniGameTwo: {fileID: 0}
+  mainCamera: {fileID: 519420031}
 --- !u!1 &958190512
 GameObject:
   m_ObjectHideFlags: 0

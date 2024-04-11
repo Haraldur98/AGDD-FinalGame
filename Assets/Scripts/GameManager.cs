@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public int[] currentLevelsMiniGames = new int[3] { 0, 0, 0 };
     public GameObject miniGameOne;
     public GameObject miniGameTwo;
+    public Camera mainCamera;
+    private int currentLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +36,13 @@ public class GameManager : MonoBehaviour
         if (scene.name == "MiniGameUNO")
         {
             // Find the MiniGameManager in the loaded scene
+            StartMiniGame startMiniGame = GameObject.FindObjectOfType<StartMiniGame>();
+            startMiniGame.StartGame(currentLevel);
             MiniGameManager miniGameManager = GameObject.FindObjectOfType<MiniGameManager>();
+            miniGameManager.mainCameraPos = mainCamera.transform.position;
 
             // Subscribe to the onMiniGameEnd event
-            miniGameManager.onMiniGameEnd.AddListener(() => EndMiniGame(scene.name));
+            startMiniGame.onMiniGameEnd.AddListener(() => EndMiniGame(scene.name));
         }
         else if (scene.name == "minigame2")
         {
@@ -78,9 +83,9 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void LoadMiniGame(string sceneName)
+    public void LoadMiniGame(string sceneName, int level)
     {
-
+        currentLevel = level;
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
     }
 
