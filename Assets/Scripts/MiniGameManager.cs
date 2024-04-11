@@ -100,9 +100,8 @@ public class MiniGameManager : MonoBehaviour
             {
                 score -= decrement;
                 cashText.text = "<color=green>$</color>:" + score;
+                scoreDecrementTimer = 0;
             }
-            
-
         }
     }
 
