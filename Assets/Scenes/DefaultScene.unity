@@ -46857,7 +46857,7 @@ GameObject:
   - component: {fileID: 669386601}
   m_Layer: 0
   m_Name: overflowfixes
-  m_TagString: Stairs
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72602,6 +72602,8 @@ MonoBehaviour:
   timeSlider: {fileID: 1839560466}
   coinText: {fileID: 1750856543}
   currentLevelsMiniGames: 000000000000000000000000
+  miniGameOne: {fileID: 0}
+  miniGameTwo: {fileID: 0}
 --- !u!1 &958190512
 GameObject:
   m_ObjectHideFlags: 0
