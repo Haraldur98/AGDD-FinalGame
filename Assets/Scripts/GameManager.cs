@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     {
         time = gameDuration ;
         coins = 0;
+        PlayerPrefs.SetInt("Score", 0); // Initialize the player's score
         coinText.text = "<color=green>$</color>:" + coins; // Initialize the text
 
         // Subscribe to the onMiniGameEnd event
@@ -82,7 +83,11 @@ public class GameManager : MonoBehaviour
         int minutes = (int)(time / 60);
         int seconds = (int)(time % 60);
         digitalClock.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-
+        // Get score from PlayerPrefs
+        int cash = PlayerPrefs.GetInt("Score", 0);
+        // Update coin text
+        coinText.text = "<color=green>$</color>:" + cash;
+        coins = cash;
     }
 
     void EndGame()
@@ -90,7 +95,7 @@ public class GameManager : MonoBehaviour
         // Get the player's name
         string playerName = PlayerPrefs.GetString("PlayerName", "Player");
         // Save the high score
-        // HighScoreManager.Instance.AddHighScore(playerName , coins);
+        HighScoreManager.Instance.AddHighScore(playerName , coins);
          // Save the player's score
         PlayerPrefs.SetInt("Score", coins);
         // Load the end screen

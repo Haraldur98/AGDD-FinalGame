@@ -79,6 +79,19 @@ public class MiniGame2Manager : MonoBehaviour
             }
         }
     }
+    private void Endgame() {
+        movablePrefab = null;
+        fixing = false;
+        // Get score from PlayerPrefs 
+        int cash = PlayerPrefs.GetInt("Score", 0);
+        // Add the score from the mini game to the total score
+        cash += score;
+        // Save the player's score
+        PlayerPrefs.SetInt("Score", cash);
+        GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
+        gameManager.isInMiniGame = false;
+        onMiniGameEnd?.Invoke();
+    }
 
     // Call this when a boundary is destroyed
     public void BoundaryDestroyed()
@@ -90,11 +103,7 @@ public class MiniGame2Manager : MonoBehaviour
             StartCoroutine(MakeMainPartFall());
             fixing = true;
         } else if (boundariesDestroyed == 4 && fixing) {
-            movablePrefab = null;
-            fixing = false;
-            GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
-            gameManager.isInMiniGame = false;
-            onMiniGameEnd?.Invoke();
+            Endgame();
         }
     }
 

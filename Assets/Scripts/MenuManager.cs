@@ -43,7 +43,7 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetInt("Tutorial", tutorial ? 1 : 0);
 
         // Load the game scene
-        SceneManager.LoadScene("DefaultScene");
+        SceneManager.LoadScene("halli_test_minigame");
         Debug.Log("StartGame");
     }
 

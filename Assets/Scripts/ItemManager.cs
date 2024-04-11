@@ -41,11 +41,14 @@ public class ItemManager : MonoBehaviour
 
     public void retriveLadder()
     {
-        if (isLadderPlaced == true && pickUpRadiusScript.canPickUp == true)
+        if (isLadderPlaced == true && pickUpRadiusScript.canPickUp == false)
         {
             Destroy(currentLadder);
             hasLadder = false;
             isLadderPlaced = false;
+            int cash = PlayerPrefs.GetInt("Score", 0);
+            cash -= 1000;
+            PlayerPrefs.SetInt("Score", cash);
         }
     }
 
