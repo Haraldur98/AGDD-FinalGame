@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class MiniGame2Manager : MonoBehaviour
@@ -59,6 +60,8 @@ public class MiniGame2Manager : MonoBehaviour
         }
     }
 
+    public UnityEvent onMiniGameEnd;
+
     public void SpawnNewMovable(Vector3 startPosition)
     {
         // add z position to the start position
@@ -88,6 +91,7 @@ public class MiniGame2Manager : MonoBehaviour
         } else if (boundariesDestroyed == 4 && fixing) {
             movablePrefab = null;
             fixing = false;
+            onMiniGameEnd?.Invoke();
         }
     }
 
