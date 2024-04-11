@@ -72598,12 +72598,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cec626d46ac34fa881bbc95f3b343cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameDuration: 120
+  gameDuration: 300
   timeSlider: {fileID: 1839560466}
   coinText: {fileID: 1750856543}
   currentLevelsMiniGames: 000000000000000000000000
   miniGameOne: {fileID: 0}
   miniGameTwo: {fileID: 0}
+  mainCamera: {fileID: 0}
 --- !u!1 &958190512
 GameObject:
   m_ObjectHideFlags: 0

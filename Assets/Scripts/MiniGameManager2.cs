@@ -29,14 +29,6 @@ public class MiniGame2Manager : MonoBehaviour
         scoreText.text = "Cash for job: " + score + "$";
     }
 
-    void Start() {
-        Debug.Log("MOEW: " + mainCameraPos);
-        GameObject miniGameCamera = GameObject.Find("MiniGameTwoCamera");
-        miniGameCamera.transform.position = mainCameraPos;
-        Transform miniGameHolder = gameObject.transform.parent;
-        miniGameHolder.transform.position = new Vector3(mainCameraPos.x, mainCameraPos.y, -1);
-    }
-
     void Update() {
         if (score <= 0 && !lost) {
             movablePrefab = null;
@@ -100,6 +92,8 @@ public class MiniGame2Manager : MonoBehaviour
         } else if (boundariesDestroyed == 4 && fixing) {
             movablePrefab = null;
             fixing = false;
+            GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
+            gameManager.isInMiniGame = false;
             onMiniGameEnd?.Invoke();
         }
     }

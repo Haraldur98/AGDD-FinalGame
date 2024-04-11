@@ -38,6 +38,7 @@ public class MiniGameManager : MonoBehaviour
         startMiniGame = GameObject.FindObjectOfType<StartMiniGame>();
         difficulty = startMiniGame.difficulty;
         adjustScore();
+        cashSlider.maxValue = score / decrement;
         // Initialize pipes with random rotations
         for (int i = 0; i < pipes.Length; i++)
         {
@@ -57,30 +58,21 @@ public class MiniGameManager : MonoBehaviour
     {
         switch (difficulty)
         {
-            case 0:
-                score = 0;
-                decrement = 0;
-                cashSlider.maxValue = 0;
-                break;
             case 1:
                 score = 1000;
                 decrement = 20;
-                cashSlider.maxValue = score / decrement;
                 break;
             case 2:
                 score = 2000;
                 decrement = 50;
-                cashSlider.maxValue = score / decrement;
                 break;
             case 3:
                 score = 4000;
                 decrement = 100;
-                cashSlider.maxValue = score / decrement;
                 break;
             default:
                 score = 1000;
                 decrement = 20;
-                cashSlider.maxValue = score / decrement;
                 break;
         }
     }
@@ -92,12 +84,14 @@ public class MiniGameManager : MonoBehaviour
             Debug.Log("BINGO");
             timerIsRunning = false; // Stop the timer when the game ends
 
+            GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
+            gameManager.isInMiniGame = false;
             // Trigger the onMiniGameEnd event
             startMiniGame.onMiniGameEnd?.Invoke();
         }
 
         if (timerIsRunning)
-        {   
+        {
             // Ensure the last second is counted
             // decrement score every second:
             scoreDecrementTimer += Time.deltaTime;
@@ -107,8 +101,9 @@ public class MiniGameManager : MonoBehaviour
             {
                 score -= decrement;
                 cashText.text = "<color=green>$</color>:" + score;
-                scoreDecrementTimer = 0;
             }
+
+
         }
     }
 

@@ -36,8 +36,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Animation")]
     public Animator animator;
+    GameManager gameManager;
 
-     public enum PlayerState
+    public enum PlayerState
     {
         Idle,
         Walking,
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
         PlacingItem
     }
 
-      public PlayerState currentState;
+    public PlayerState currentState;
 
     void Start()
     {
@@ -55,10 +56,16 @@ public class PlayerController : MonoBehaviour
         itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         detectGround = GetComponentInChildren<DetectGround>();
         animator = GetComponentInChildren<Animator>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
     void Update()
     {
+        if (gameManager.isInMiniGame)
+        {
+            rb.velocity *= 0;
+            return;
+        }
         handleAnimations();
         stateHandler();
         HandleInput();
@@ -130,7 +137,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Jump()
-    {   
+    {
         rb.gravityScale = 1;
         rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         isClimbing = false;
@@ -160,7 +167,7 @@ public class PlayerController : MonoBehaviour
 
     public void handleAnimations()
     {
-         // Update the current state based on the player's actions
+        // Update the current state based on the player's actions
         if (isPlacingItem)
         {
             currentState = PlayerState.PlacingItem;
@@ -188,12 +195,12 @@ public class PlayerController : MonoBehaviour
     }
 
     public void stateHandler()
-    {   
+    {
         if (currentState == PlayerState.Walking)
         {
             animator.SetBool("walk", true);
         }
-        else 
+        else
         {
             animator.SetBool("walk", false);
 
@@ -203,7 +210,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("run", true);
         }
-        else 
+        else
         {
             animator.SetBool("run", false);
         }
@@ -212,7 +219,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("place", true);
         }
-        else 
+        else
         {
             animator.SetBool("place", false);
         }
@@ -221,7 +228,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("climb", true);
         }
-        else 
+        else
         {
             animator.SetBool("climb", false);
         }
@@ -229,20 +236,20 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("climbIdle", true);
         }
-        else 
+        else
         {
             animator.SetBool("climbIdle", false);
         }
     }
-    
+
 
     void OnCollisionEnter2D(Collision2D collision)
-    {   
+    {
         if (collision.gameObject.CompareTag("Steps"))
         {
             isClimbing = true;
         }
-        else 
+        else
         {
             transform.up = Vector2.up;
         }
@@ -257,17 +264,17 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other)
-    {   
+    {
 
         if (other.gameObject.CompareTag("Stairs"))
-        {   
+        {
             isOnStairs = true;
             uImanagerScript.ShowIndicator(UImanager.ActionState.Climb);
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
-    {   
+    {
         if (other.gameObject.CompareTag("Stairs"))
         {
             isOnStairs = false;
