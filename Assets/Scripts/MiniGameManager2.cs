@@ -57,7 +57,8 @@ public class MiniGame2Manager : MonoBehaviour
     public void SpawnNewMovable(Vector3 startPosition)
     {
         // add z position to the start position
-        if (movablePrefab != null) {
+        if (movablePrefab != null)
+        {
             initalPosition = startPosition;
             startPosition.z = -4;
             GameObject newMovable = Instantiate(movablePrefab, startPosition, Quaternion.identity);
@@ -65,12 +66,14 @@ public class MiniGame2Manager : MonoBehaviour
             newMovable.GetComponent<Collider2D>().enabled = true;
             movablePrefab = newMovable;
             newMovable.GetComponent<MovingObjectController>().InitializeMovement();
-            if (fixing) {
+            if (fixing)
+            {
                 movablePrefab.GetComponent<MovingObjectController>().fixing = true;
             }
         }
     }
-    private void Endgame() {
+    private void Endgame()
+    {
         movablePrefab = null;
         fixing = false;
         // Get score from PlayerPrefs 
@@ -93,7 +96,9 @@ public class MiniGame2Manager : MonoBehaviour
             // Make the main part fall or change state
             StartCoroutine(MakeMainPartFall());
             fixing = true;
-        } else if (boundariesDestroyed == 4 && fixing) {
+        }
+        else if (boundariesDestroyed == 4 && fixing)
+        {
             Endgame();
         }
     }
@@ -101,7 +106,7 @@ public class MiniGame2Manager : MonoBehaviour
     public void decrementScore()
     {
         score -= decrement;
-        scoreText.text = "Cash for job: " + score + "$";
+        scoreText.text = "<color=green>$</color>:" + score;
     }
 
     IEnumerator MakeMainPartFall()
@@ -113,7 +118,7 @@ public class MiniGame2Manager : MonoBehaviour
         {
             // Move the main part down
             mainPart.transform.Translate(0, -10f * Time.deltaTime, 0);
-            
+
             // Increment the elapsed time each frame
             elapsed += Time.deltaTime;
             yield return null; // Wait for the next frame
@@ -123,10 +128,11 @@ public class MiniGame2Manager : MonoBehaviour
         fixedPartPrefab.GetComponent<FloatToPosition>().InitializeMovement();
     }
 
-    public void ReappearBoundary() {
+    public void ReappearBoundary()
+    {
         // get left and right boundary objects
         leftBoundary.SetActive(true);
         rightBoundary.SetActive(true);
-        
+
     }
 }
