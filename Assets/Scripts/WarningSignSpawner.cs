@@ -17,9 +17,13 @@ public class WarningSignSpawner : MonoBehaviour
     {
         // To add a new warningSign place a location for the minigame of choice
         posForMiniGameOne.Add(new Vector3(24.87f, -12.2f));
+        posForMiniGameOne.Add(new Vector3(-27.08905f, -19.72915f));
+        posForMiniGameOne.Add(new Vector3(31.47059f, -18.41f));
         posForMiniGameOne.Add(new Vector3(-16.37041f, -27.67455f));
-        posForMiniGameTwo.Add(new Vector3(47f, -38.3f));
+
         posForMiniGameTwo.Add(new Vector3(-10.34f, -11.09f));
+        posForMiniGameTwo.Add(new Vector3(47f, -38.3f));
+        posForMiniGameTwo.Add(new Vector3(-36.72654f, -44.2f));
 
         for (int i = 0; i < posForMiniGameOne.Count; i++)
         {
