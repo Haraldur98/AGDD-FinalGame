@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject miniGameTwo;
     public Camera mainCamera;
     public int currentLevel;
-
+    private int miniGamesPlayed = 0;
     public bool isInMiniGame;
     public bool isTimeRunning;
     // Start is called before the first frame update
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
         }
     
 
-        if (time < 0)
+        if (time < 0 || miniGamesPlayed == 7)
         {
             EndGame();
             time = 0;
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
         coins = cash;
     }
 
-    void EndGame()
+    public void EndGame()
     {   
         // Get the player's name
         string playerName = PlayerPrefs.GetString("PlayerName", "Player");
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
 
 
     public void LoadMiniGame(string sceneName, int level)
-    { // Save the player's score
+    {
         currentLevel = level;
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
     }
@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour
     {   
         isInMiniGame = false;
         // Unload the mini-game scene
+        miniGamesPlayed++;
         SceneManager.UnloadSceneAsync(miniGameSceneName);
     }
 
