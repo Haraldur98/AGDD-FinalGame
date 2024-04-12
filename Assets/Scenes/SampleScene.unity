@@ -30044,12 +30044,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ladderPrefab: {fileID: 5617067434527823259, guid: 942334d7c8d1ad34fb1448a3c9c496ac, type: 3}
-  currentLadder: {fileID: 0}
   placementIndicator: {fileID: 5617067434527823259, guid: a11e5480f217b54458c2895dd807484d, type: 3}
+  currentLadder: {fileID: 0}
+  hasLadder: 0
   mainCamera: {fileID: 0}
   isPlacingItem: 0
-  playerTransform: {fileID: 0}
+  isLadderPlaced: 0
   ladderLength: 1
+  groundDistance: 10
+  lastHitpont_y: 0
+  pickUpRadiusScript: {fileID: 0}
+  uImanagerScript: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1223140923
 GameObject:
   m_ObjectHideFlags: 0
@@ -30535,11 +30543,19 @@ MonoBehaviour:
   speed: 5
   runSpeed: 7.5
   jumpForce: 5
+  climbSpeed: 5
   isPlacingItem: 0
-  isClimping: 0
+  isClimbing: 0
+  isOnStairs: 0
+  isClimbingStairs: 0
   spriteRenderer: {fileID: 0}
   spriteParent: {fileID: 260863387}
+  detectGround: {fileID: 0}
   itemManager: {fileID: 0}
+  ladderDirection: {x: 0, y: 0}
+  uImanagerScript: {fileID: 0}
+  animator: {fileID: 0}
+  currentState: 0
 --- !u!4 &1892238291
 Transform:
   m_ObjectHideFlags: 0
@@ -30594,9 +30610,76 @@ Transform:
   - {fileID: 99836863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &7566914046393137134
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2286288081524215654, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      propertyPath: m_Name
+      value: MiniGameInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504882366296910354, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5021
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504882366296910354, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.449
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504882366296910354, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01637
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504882366296910354, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504882366296910354, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504882366296910354, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504882366296910354, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504882366296910354, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504882366296910354, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504882366296910354, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1583041645518191179, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 707811234032658484, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 2615083306814959687, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: 3b1ddf5db8d03478ea798e5509797c21, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2003714904}
   - {fileID: 1274969361}
+  - {fileID: 7566914046393137134}

@@ -82,12 +82,7 @@ public class MiniGameManager : MonoBehaviour
         if (endPipe.hasWater)
         {
             Debug.Log("BINGO");
-            timerIsRunning = false; // Stop the timer when the game ends
-
-            GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
-            gameManager.isInMiniGame = false;
-            // Trigger the onMiniGameEnd event
-            startMiniGame.onMiniGameEnd?.Invoke();
+            EndGame();
         }
 
         if (timerIsRunning)
@@ -101,10 +96,24 @@ public class MiniGameManager : MonoBehaviour
             {
                 score -= decrement;
                 cashText.text = "<color=green>$</color>:" + score;
+                scoreDecrementTimer = 0;
             }
 
 
         }
+    }
+    private void EndGame()
+    {
+        timerIsRunning = false; // Stop the timer when the game ends
+        GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
+        gameManager.isInMiniGame = false;
+        // Get score from PlayerPrefs 
+        int cash = PlayerPrefs.GetInt("Score", 0);
+        // Add the score from the mini game to the total score
+        cash += score;
+        // Save the player's score
+        PlayerPrefs.SetInt("Score", cash);
+        startMiniGame.onMiniGameEnd?.Invoke();
     }
 
     // Call this method to start the water flow from the starting pipe

@@ -367,6 +367,7 @@ MonoBehaviour:
   leftBoundary: {fileID: 550366663779998806}
   rightBoundary: {fileID: 2726509382992058871}
   difficulty: 1
+  mainCameraPos: {x: 0, y: 0, z: 0}
   onMiniGameEnd:
     m_PersistentCalls:
       m_Calls: []

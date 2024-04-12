@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; // Include the UnityEngine.UI namespace
 using TMPro; // Include the TextMeshPro namespace
 
 public class UImanager : MonoBehaviour
@@ -16,7 +17,12 @@ public class UImanager : MonoBehaviour
     public Transform playerTransform; // The player's transform
     public GameObject actionIndicator; // The UI element
     public TextMeshProUGUI actionText; // The UI Text
+    public Button ladderButton; // New Button variable
 
+    [Header("refrence to scripts to detect if the ladder is near or not")]
+    public PickUpRadius pickUpRadius; // Reference to the PickUpRadius script
+    public ItemManager itemManager; // Reference to the ItemManager script
+    
     private Dictionary<ActionState, string> actionMessages;
 
     private void Start()
@@ -37,6 +43,18 @@ public class UImanager : MonoBehaviour
         screenPosition.y += 60; // Adjust this value to position the indicator above the player
         screenPosition.x -= 20; // Adjust this value to position the indicator above the player
         actionIndicator.transform.position = screenPosition;
+
+        if ( pickUpRadius.canPickUp == false && itemManager.isLadderPlaced == true)
+        {
+            // If the ladder is lost, enable the button
+            ladderButton.interactable = true;
+        }
+        else
+        {
+            // If the ladder is not lost, disable the button
+            ladderButton.interactable = false;
+        }
+    
     }
 
     public void ShowIndicator(ActionState state)

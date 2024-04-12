@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     public float time { get; private set; } // The current time
     public int coins { get; private set; } // The number of coins
     public float gameDuration = 20; // The duration of a month in seconds
-    public Slider timeSlider; // Reference to the slider
+    // public Slider timeSlider; // Reference to the slider
     public TextMeshProUGUI coinText; // Reference to the TextMeshPro text
+    public TextMeshProUGUI digitalClock; // Reference to the TextMeshPro text for the timer
     public int[] currentLevelsMiniGames = new int[3] { 0, 0, 0 };
     public GameObject miniGameOne;
     public GameObject miniGameTwo;
@@ -19,17 +20,27 @@ public class GameManager : MonoBehaviour
     private int currentLevel;
 
     public bool isInMiniGame;
-
+    public bool isTimeRunning;
     // Start is called before the first frame update
+    public GameObject whereToSpawn;
     void Start()
     {
-        time = 0;
+        time = gameDuration ;
         coins = 0;
+        PlayerPrefs.SetInt("Score", 0); // Initialize the player's score
         coinText.text = "<color=green>$</color>:" + coins; // Initialize the text
-        timeSlider.maxValue = gameDuration; // Initialize the slider's max value
+
 
         // Subscribe to the onMiniGameEnd event
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // check if user wants tutorial
+        bool tutorial = PlayerPrefs.GetInt("Tutorial", 0) == 1;
+
+        if (tutorial)
+        {
+            whereToSpawn.transform.position = new Vector3(-30f, 9.5f, 0.4f);
+        }
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -65,15 +76,38 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Increment the time by the time since the last frame
-        time += Time.deltaTime;
-        coinText.text = "<color=green>$</color>:" + coins; // Update the text
-        timeSlider.value = time; // Update the slider's value
-
-        if (time >= gameDuration)
+        if (isTimeRunning) 
         {
-            // End the game
-            EndGame();
+            time -= Time.deltaTime;
         }
+
+        if (time < 60)
+        {
+            // warning text to show the player that the game is about to end
+             digitalClock.color = new Color(1.0f, 0.5f, 0.0f); // Orange color
+        }
+        else if (time < 30)
+        {
+            // warning text to show the player that the game is about to end
+            digitalClock.color = Color.red;
+        }
+    
+
+        if (time < 0)
+        {
+            EndGame();
+            time = 0;
+        }
+
+        // Update the digital clock's text
+        int minutes = (int)(time / 60);
+        int seconds = (int)(time % 60);
+        digitalClock.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        // Get score from PlayerPrefs
+        int cash = PlayerPrefs.GetInt("Score", 0);
+        // Update coin text
+        coinText.text = "<color=green>$</color>:" + cash;
+        coins = cash;
     }
 
     void EndGame()
@@ -81,7 +115,7 @@ public class GameManager : MonoBehaviour
         // Get the player's name
         string playerName = PlayerPrefs.GetString("PlayerName", "Player");
         // Save the high score
-        // HighScoreManager.Instance.AddHighScore(playerName , coins);
+        HighScoreManager.Instance.AddHighScore(playerName , coins);
          // Save the player's score
         PlayerPrefs.SetInt("Score", coins);
         // Load the end screen
@@ -97,7 +131,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void EndMiniGame(string miniGameSceneName)
-    {
+    {   
+        isInMiniGame = false;
         // Unload the mini-game scene
         SceneManager.UnloadSceneAsync(miniGameSceneName);
     }

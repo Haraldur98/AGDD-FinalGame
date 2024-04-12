@@ -11,7 +11,7 @@ public class ItemManager : MonoBehaviour
     public GameObject currentLadder;
 
     [Header("ladder Variables")]
-    private bool hasLadder = false;
+    public bool hasLadder = false;
     public UnityEngine.Camera mainCamera; 
     public bool isPlacingItem = false;
     public bool isLadderPlaced = false;
@@ -39,6 +39,19 @@ public class ItemManager : MonoBehaviour
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
     }
 
+    public void retriveLadder()
+    {
+        if (isLadderPlaced == true && pickUpRadiusScript.canPickUp == false)
+        {
+            Destroy(currentLadder);
+            hasLadder = false;
+            isLadderPlaced = false;
+            int cash = PlayerPrefs.GetInt("Score", 0);
+            cash -= 1000;
+            PlayerPrefs.SetInt("Score", cash);
+        }
+    }
+
    public void ladderPlacement()
     {
         
@@ -46,9 +59,12 @@ public class ItemManager : MonoBehaviour
         if (isLadderPlaced == true && pickUpRadiusScript.canPickUp == true)
         {   
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1)) 
+            {
                 Destroy(currentLadder);
                 hasLadder = false;
+                isLadderPlaced = false;
+            }
         }
         
         // Check if the player is placing an item

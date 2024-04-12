@@ -60,7 +60,12 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        if (transform.position.y < -5)
+        {
+            gameManager.isTimeRunning = true; 
+        }
+
         if (gameManager.isInMiniGame)
         {
             rb.velocity *= 0;
@@ -99,6 +104,12 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement()
     {
         float moveHorizontal = Input.GetAxis("Horizontal") * (Input.GetKey(KeyCode.LeftShift) ? runSpeed : speed);
+        
+        if (itemManager.isPlacingItem)
+        {
+            moveHorizontal = 0;
+        }
+        
         rb.velocity = new Vector2(moveHorizontal, rb.velocity.y);
 
         if (isClimbing && itemManager.currentLadder != null)
