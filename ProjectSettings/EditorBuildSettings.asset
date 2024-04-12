@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MiniGameUNO.unity
     guid: 7990e1c08a37d4e27a0fab7de6e8712f
+  - enabled: 1
+    path: Assets/Scenes/halli_test_minigame_working.unity
+    guid: bde2587e4934ca64f932dc59e95e11de
   m_configObjects: {}

@@ -23,12 +23,20 @@ public class GameManager : MonoBehaviour
     public bool isTimeRunning;
     // Start is called before the first frame update
     public GameObject whereToSpawn;
+    public AudioSource audioSource;
+    public AudioClip theme;
+
     void Start()
     {
-        time = gameDuration ;
+        time = gameDuration;
         coins = 0;
         PlayerPrefs.SetInt("Score", 0); // Initialize the player's score
         coinText.text = "<color=green>$</color>:" + coins; // Initialize the text
+
+        audioSource.volume = 0.01f;
+        audioSource.clip = theme;
+        audioSource.loop = true;
+        audioSource.Play();
 
 
         // Subscribe to the onMiniGameEnd event
@@ -56,7 +64,7 @@ public class GameManager : MonoBehaviour
             miniGameManager.mainCameraPos = mainCamera.transform.position;
 
             // Subscribe to the onMiniGameEnd event
-            startMiniGame.onMiniGameEnd.AddListener(() => 
+            startMiniGame.onMiniGameEnd.AddListener(() =>
                 EndMiniGame(scene.name));
         }
         else if (scene.name == "minigame2")
@@ -75,22 +83,22 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Increment the time by the time since the last frame
-        if (isTimeRunning) 
+        if (isTimeRunning)
         {
             time -= Time.deltaTime;
         }
 
-        if (time < 60)
-        {
-            // warning text to show the player that the game is about to end
-             digitalClock.color = new Color(1.0f, 0.5f, 0.0f); // Orange color
-        }
-        else if (time < 30)
+        if (time < 30)
         {
             // warning text to show the player that the game is about to end
             digitalClock.color = Color.red;
         }
-    
+        else if (time < 60)
+        {
+            // warning text to show the player that the game is about to end
+            digitalClock.color = new Color(1.0f, 0.5f, 0.0f); // Orange color
+        }
+
 
         if (time < 0 || miniGamesPlayed == 7)
         {
@@ -110,12 +118,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void EndGame()
-    {   
+    {
         // Get the player's name
         string playerName = PlayerPrefs.GetString("PlayerName", "Player");
         // Save the high score
-        HighScoreManager.Instance.AddHighScore(playerName , coins);
-         // Save the player's score
+        HighScoreManager.Instance.AddHighScore(playerName, coins);
+        // Save the player's score
         PlayerPrefs.SetInt("Score", coins);
         // Load the end screen
         SceneManager.LoadScene("EndScreen");
@@ -130,7 +138,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void EndMiniGame(string miniGameSceneName)
-    {   
+    {
         isInMiniGame = false;
         // Unload the mini-game scene
         miniGamesPlayed++;
@@ -165,7 +173,7 @@ public class GameManager : MonoBehaviour
     }
 
     void OnDestroy()
-{
-    SceneManager.sceneLoaded -= OnSceneLoaded;
-}
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 }

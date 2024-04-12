@@ -27,7 +27,7 @@ public class MiniGame2Manager : MonoBehaviour
     void Start()
     {
         adjustScore();
-        scoreText.text = "Cash for job: " + score + "$";
+        scoreText.text = "<color=green>$</color>:" + score;
     }
 
     public void adjustScore()
