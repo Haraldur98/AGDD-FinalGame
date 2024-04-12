@@ -24,34 +24,25 @@ public class MiniGame2Manager : MonoBehaviour
     public Vector3 mainCameraPos;
     public UnityEvent onMiniGameEnd;
 
-    void Awake()
+    void Start()
     {
         adjustScore();
-        scoreText.text = "Cash for job: " + score + "$";
-    }
-
-    void Update() {
-        if (score <= 0 && !lost) {
-            movablePrefab = null;
-            fixing = false;
-            lost = true;
-            Destroy(movablePrefab);
-        }
+        scoreText.text = "<color=green>$</color>:" + score;
     }
 
     public void adjustScore()
     {
         switch (difficulty)
         {
-            case 1:
+            case 0:
                 score = 1000;
                 decrement = 50;
                 break;
-            case 2:
+            case 1:
                 score = 3000;
                 decrement = 100;
                 break;
-            case 3:
+            case 2:
                 score = 5000;
                 decrement = 300;
                 break;

@@ -10,11 +10,18 @@ public class MenuManager : MonoBehaviour
     public TMP_InputField nameInputField;
     public Toggle tutorialToggle;
     public TextMeshProUGUI highScoresText;
+    public AudioSource audioSource;
+    public AudioClip theme;
     private void Start()
     {
         // Update the high scores
         UpdateHighScores();
         LogPlayerPrefs();
+        Debug.Log("MEOW");
+        audioSource.volume = 0.01f;
+        audioSource.clip = theme;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     public void StartGame()
@@ -43,7 +50,7 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetInt("Tutorial", tutorial ? 1 : 0);
 
         // Load the game scene
-        SceneManager.LoadScene("halli_test_minigame");
+        SceneManager.LoadScene("halli_test_minigame_working");
         Debug.Log("StartGame");
     }
 
@@ -53,6 +60,7 @@ public class MenuManager : MonoBehaviour
         Dictionary<string, int> highScores = HighScoreManager.Instance.GetHighScores();
 
         // Find the length of the longest name
+        if (highScores.Keys.Count == 0) return;
         int maxLength = highScores.Keys.Max(name => name.Length);
 
         // Update the high scores text

@@ -26,7 +26,7 @@ public class EndScreenManager : MonoBehaviour
     public void PlayAgainButton()
     {
         // Reload the game scene
-        SceneManager.LoadScene("DefaultScene");
+        SceneManager.LoadScene("halli_test_minigame_working");
     }
 
     public void MainMenuButton()
