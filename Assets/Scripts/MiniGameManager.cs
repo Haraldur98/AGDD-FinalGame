@@ -38,7 +38,6 @@ public class MiniGameManager : MonoBehaviour
         startMiniGame = GameObject.FindObjectOfType<StartMiniGame>();
         difficulty = startMiniGame.difficulty;
         adjustScore();
-        cashSlider.maxValue = score / decrement;
         // Initialize pipes with random rotations
         for (int i = 0; i < pipes.Length; i++)
         {
@@ -58,6 +57,10 @@ public class MiniGameManager : MonoBehaviour
     {
         switch (difficulty)
         {
+            case 0:
+                score = 100;
+                decrement = 5;
+                break;
             case 1:
                 score = 1000;
                 decrement = 20;
@@ -75,6 +78,7 @@ public class MiniGameManager : MonoBehaviour
                 decrement = 20;
                 break;
         }
+        cashSlider.maxValue = score / decrement;
     }
 
     private void Update()

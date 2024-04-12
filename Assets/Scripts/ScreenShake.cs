@@ -18,7 +18,6 @@ public class ScreenShake : MonoBehaviour
     }
     public IEnumerator Shake()
     {
-        Debug.Log("Shake");
         Vector3 originalPosition = transform.position;
         float elapsed = 0.0f;
 

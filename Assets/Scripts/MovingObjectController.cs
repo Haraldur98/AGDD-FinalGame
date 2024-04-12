@@ -13,6 +13,7 @@ public class MovingObjectController : MonoBehaviour
     private Vector3 startPosition; // Store the start position
     public Camera mainCamera;
     private MiniGame2Manager gameManager;
+    private GameManager overallGameManager; // Store the current collided boundary object
     private GameObject currentBoundary; // Store the current collided boundary object
     public bool fixing = false;
 
@@ -20,6 +21,7 @@ public class MovingObjectController : MonoBehaviour
     {
         startPosition = transform.position;
         gameManager = FindObjectOfType<MiniGame2Manager>();
+        overallGameManager = FindObjectOfType<GameManager>();
         InitializeMovement();
     }
 
@@ -52,12 +54,12 @@ public class MovingObjectController : MonoBehaviour
     }
 
     public float adjustSpeed() {
-        switch (gameManager.difficulty) {
-            case 1:
+        switch (overallGameManager.currentLevel) {
+            case 0:
                 return 5.0f;
-            case 2:
+            case 1:
                 return 10.0f;
-            case 3:
+            case 2:
                 return 15.0f;
             default:
                 return 5.0f;
@@ -76,16 +78,13 @@ public class MovingObjectController : MonoBehaviour
     }
 
     public void addWelding(GameObject currentBoundary) {
-        Debug.Log(currentBoundary.gameObject.name);
         if (currentBoundary.transform.parent.gameObject.name == "leftBoundary")
         {
             // Get object called leftWelded
-            Debug.Log("Left boundary");
             GameObject leftWelded = currentBoundary.transform.parent.transform.parent.transform.parent.Find("leftWelded").gameObject; // Find the leftWelded object
             leftWelded.SetActive(true);
         } else if (currentBoundary.transform.parent.gameObject.name == "rightBoundary")
         {
-            Debug.Log("Right boundary");
             // Get object called rightWelded
             GameObject rightWelded = currentBoundary.transform.parent.transform.parent.transform.parent.Find("rightWelded").gameObject; // Find the rightWelded object
             rightWelded.SetActive(true);
@@ -110,18 +109,6 @@ public class MovingObjectController : MonoBehaviour
             gameManager.SpawnNewMovable(startPosition);
             gameManager.decrementScore();
         }
-        // } else if (stopped && isInBounds && currentBoundary == null && fixing)
-        // {
-        //     foreach (Transform child in currentBoundary.transform)
-        //     {
-        //         if (child.gameObject.name == "base") continue;
-        //         Destroy(child.gameObject);
-        //     }
-            
-        //     currentBoundary.GetComponent<BoxCollider2D>().enabled = false;
-        //     gameManager.BoundaryDestroyed();
-        //     Destroy(gameObject); 
-        //     gameManager.SpawnNewMovable(startPosition);
 
     }
 

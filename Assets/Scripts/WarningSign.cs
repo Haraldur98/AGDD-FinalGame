@@ -18,12 +18,13 @@ public class WarningSign : MonoBehaviour
     // Dictionary with key as signLevel and value potential cash
     public static Dictionary<int, int> FixPipeScores = new Dictionary<int, int>
     {
-        { 1, 1000 },
-        { 2, 3000 },
-        { 3, 5000 }
+        { 0, 1000 },
+        { 1, 3000 },
+        { 2, 5000 }
     };
     public static Dictionary<int, int> FlowPipeScores = new Dictionary<int, int>
     {
+        { 0, 100 },
         { 1, 1000 },
         { 2, 2000 },
         { 3, 4000 }
@@ -101,6 +102,7 @@ public class WarningSign : MonoBehaviour
         {
             if (FixPipeScores.TryGetValue(signLevel, out int fixCash))
             {
+                Debug.Log("Fix cash: " + fixCash);
                 potentialCash = fixCash;
             }
         }
