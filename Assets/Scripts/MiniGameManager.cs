@@ -27,6 +27,8 @@ public class MiniGameManager : MonoBehaviour
     int totalPipes = 0;
     float[] rotations = { 0, 90, 180, 270 };
     public int difficulty;
+    public AudioSource audioSource;
+    public AudioClip pipeTurnClip;
     StartMiniGame startMiniGame;
 
     IEnumerator Start()
@@ -41,7 +43,10 @@ public class MiniGameManager : MonoBehaviour
         // Initialize pipes with random rotations
         for (int i = 0; i < pipes.Length; i++)
         {
+            audioSource.clip = pipeTurnClip;
+            audioSource.volume = 0.05f;
             MiniGameUnoPipe pipe = pipeHolder.transform.GetChild(i).GetComponent<MiniGameUnoPipe>();
+            pipe.audioSource = audioSource;
             int randIdx = Random.Range(0, rotations.Length);
             pipe.transform.eulerAngles = new Vector3(0, 0, rotations[randIdx]);
         }

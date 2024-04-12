@@ -16,6 +16,9 @@ public class MovingObjectController : MonoBehaviour
     private GameManager overallGameManager; // Store the current collided boundary object
     private GameObject currentBoundary; // Store the current collided boundary object
     public bool fixing = false;
+    public AudioSource audioSource;
+    public AudioClip weldPipeClip;
+    public AudioClip cutPipeClip;
 
     void Awake()
     {
@@ -23,6 +26,10 @@ public class MovingObjectController : MonoBehaviour
         gameManager = FindObjectOfType<MiniGame2Manager>();
         overallGameManager = FindObjectOfType<GameManager>();
         InitializeMovement();
+    }
+
+    private void Start() {
+        audioSource.volume = 0.05f;
     }
 
     void Update()
@@ -53,8 +60,10 @@ public class MovingObjectController : MonoBehaviour
         }
     }
 
-    public float adjustSpeed() {
-        switch (overallGameManager.currentLevel) {
+    public float adjustSpeed()
+    {
+        switch (overallGameManager.currentLevel)
+        {
             case 0:
                 return 5.0f;
             case 1:
@@ -71,19 +80,21 @@ public class MovingObjectController : MonoBehaviour
         stopped = false; // Ensure the object is set to move
         speed = adjustSpeed(); // Set initial speed
         movingRight = true; // Set initial direction
-        leftBound = - 5.0f;
+        leftBound = -5.0f;
         rightBound = 5.0f;
         isInBounds = false; // Reset the flag
         // Any other initialization code specific to starting movement
     }
 
-    public void addWelding(GameObject currentBoundary) {
+    public void addWelding(GameObject currentBoundary)
+    {
         if (currentBoundary.transform.parent.gameObject.name == "leftBoundary")
         {
             // Get object called leftWelded
             GameObject leftWelded = currentBoundary.transform.parent.transform.parent.transform.parent.Find("leftWelded").gameObject; // Find the leftWelded object
             leftWelded.SetActive(true);
-        } else if (currentBoundary.transform.parent.gameObject.name == "rightBoundary")
+        }
+        else if (currentBoundary.transform.parent.gameObject.name == "rightBoundary")
         {
             // Get object called rightWelded
             GameObject rightWelded = currentBoundary.transform.parent.transform.parent.transform.parent.Find("rightWelded").gameObject; // Find the rightWelded object
@@ -96,15 +107,20 @@ public class MovingObjectController : MonoBehaviour
     {
         stopped = !stopped;
         speed = stopped ? 0 : 5.0f;
+        audioSource.clip = fixing ? weldPipeClip : cutPipeClip;
+
         if (stopped && isInBounds && currentBoundary != null)
         {
+            audioSource.Play();
             if (fixing) addWelding(currentBoundary);
             currentBoundary.transform.parent.gameObject.SetActive(false);
             gameManager.BoundaryDestroyed(); // Notify the GameManager
-            Destroy(gameObject); 
+            Destroy(gameObject);
             gameManager.SpawnNewMovable(startPosition);
-        } else { // Does not hit the boundary
-            Destroy(gameObject); 
+        }
+        else
+        { // Does not hit the boundary
+            Destroy(gameObject);
             mainCamera.GetComponent<ScreenShake>().isShaking = true;
             gameManager.SpawnNewMovable(startPosition);
             gameManager.decrementScore();

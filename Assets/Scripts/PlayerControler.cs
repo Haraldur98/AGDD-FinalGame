@@ -37,6 +37,10 @@ public class PlayerController : MonoBehaviour
     [Header("Animation")]
     public Animator animator;
     GameManager gameManager;
+    public AudioSource audioSource;
+    public AudioClip walkingClip;
+    public AudioClip climbingClip;
+    private bool canPlayWalkSound = true;
 
     public enum PlayerState
     {
@@ -57,13 +61,14 @@ public class PlayerController : MonoBehaviour
         detectGround = GetComponentInChildren<DetectGround>();
         animator = GetComponentInChildren<Animator>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        audioSource.volume = 0.1f;
     }
 
     void Update()
-    {   
+    {
         if (transform.position.y < -5)
         {
-            gameManager.isTimeRunning = true; 
+            gameManager.isTimeRunning = true;
         }
 
         if (gameManager.isInMiniGame)
@@ -104,12 +109,12 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement()
     {
         float moveHorizontal = Input.GetAxis("Horizontal") * (Input.GetKey(KeyCode.LeftShift) ? runSpeed : speed);
-        
+
         if (itemManager.isPlacingItem)
         {
             moveHorizontal = 0;
         }
-        
+
         rb.velocity = new Vector2(moveHorizontal, rb.velocity.y);
 
         if (isClimbing && itemManager.currentLadder != null)
@@ -189,15 +194,35 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 currentState = PlayerState.ClimbingLadder;
+                if (canPlayWalkSound)
+                {
+                    StartCoroutine(PlayClimbingSound());
+                }
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                currentState = PlayerState.ClimbingLadder;
+                if (canPlayWalkSound)
+                {
+                    StartCoroutine(PlayClimbingSound());
+                }
             }
         }
         else if (Mathf.Abs(rb.velocity.x) > speed)
         {
             currentState = PlayerState.Running;
+            if (canPlayWalkSound)
+            {
+                StartCoroutine(PlayWalkSound(0.2f));
+            }
         }
         else if (Mathf.Abs(rb.velocity.x) > 0)
         {
             currentState = PlayerState.Walking;
+            if (canPlayWalkSound)
+            {
+                StartCoroutine(PlayWalkSound(0.3f));
+            }
         }
         else
         {
@@ -251,6 +276,34 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("climbIdle", false);
         }
+    }
+
+    IEnumerator PlayWalkSound(float intervalBetweenSteps)
+    {
+        // Prevent playing the walk sound again for 1 second
+        canPlayWalkSound = false;
+        // Play the walk sound
+        audioSource.clip = walkingClip;
+        audioSource.volume = 0.003f;
+        audioSource.Play();
+        // Wait for 1 second
+        yield return new WaitForSeconds(intervalBetweenSteps);
+        // Allow playing the walk sound again
+        canPlayWalkSound = true;
+    }
+
+    IEnumerator PlayClimbingSound()
+    {
+        // Prevent playing the walk sound again for 1 second
+        canPlayWalkSound = false;
+        // Play the walk sound
+        audioSource.clip = climbingClip;
+        audioSource.volume = 0.003f;
+        audioSource.Play();
+        // Wait for 1 second
+        yield return new WaitForSeconds(0.3f);
+        // Allow playing the walk sound again
+        canPlayWalkSound = true;
     }
 
 

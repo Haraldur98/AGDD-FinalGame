@@ -19,6 +19,8 @@ public class MiniGameUnoPipe : MonoBehaviour
     public float targetAngle = 0;
     public MiniGameUnoPipe connectionOne;
     public MiniGameUnoPipe connectionTwo;
+    public AudioSource audioSource;
+
 
     private void OnMouseDown()
     {
@@ -36,6 +38,8 @@ public class MiniGameUnoPipe : MonoBehaviour
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, 0, -90));
         float time = 0.0f;
+
+        audioSource.Play();
 
         while (time < 1.0f)
         {
