@@ -24,7 +24,7 @@ public class MiniGame2Manager : MonoBehaviour
     public Vector3 mainCameraPos;
     public UnityEvent onMiniGameEnd;
 
-    void Awake()
+    void Start()
     {
         adjustScore();
         scoreText.text = "Cash for job: " + score + "$";

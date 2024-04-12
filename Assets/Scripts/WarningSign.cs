@@ -102,6 +102,7 @@ public class WarningSign : MonoBehaviour
         {
             if (FixPipeScores.TryGetValue(signLevel, out int fixCash))
             {
+                Debug.Log("Fix cash: " + fixCash);
                 potentialCash = fixCash;
             }
         }

@@ -13,6 +13,7 @@ public class MovingObjectController : MonoBehaviour
     private Vector3 startPosition; // Store the start position
     public Camera mainCamera;
     private MiniGame2Manager gameManager;
+    private GameManager overallGameManager; // Store the current collided boundary object
     private GameObject currentBoundary; // Store the current collided boundary object
     public bool fixing = false;
 
@@ -20,6 +21,7 @@ public class MovingObjectController : MonoBehaviour
     {
         startPosition = transform.position;
         gameManager = FindObjectOfType<MiniGame2Manager>();
+        overallGameManager = FindObjectOfType<GameManager>();
         InitializeMovement();
     }
 
@@ -52,8 +54,8 @@ public class MovingObjectController : MonoBehaviour
     }
 
     public float adjustSpeed() {
-        Debug.Log(gameManager.difficulty);
-        switch (gameManager.difficulty) {
+        Debug.Log(overallGameManager.currentLevel);
+        switch (overallGameManager.currentLevel) {
             case 0:
                 return 5.0f;
             case 1:
@@ -77,16 +79,13 @@ public class MovingObjectController : MonoBehaviour
     }
 
     public void addWelding(GameObject currentBoundary) {
-        Debug.Log(currentBoundary.gameObject.name);
         if (currentBoundary.transform.parent.gameObject.name == "leftBoundary")
         {
             // Get object called leftWelded
-            Debug.Log("Left boundary");
             GameObject leftWelded = currentBoundary.transform.parent.transform.parent.transform.parent.Find("leftWelded").gameObject; // Find the leftWelded object
             leftWelded.SetActive(true);
         } else if (currentBoundary.transform.parent.gameObject.name == "rightBoundary")
         {
-            Debug.Log("Right boundary");
             // Get object called rightWelded
             GameObject rightWelded = currentBoundary.transform.parent.transform.parent.transform.parent.Find("rightWelded").gameObject; // Find the rightWelded object
             rightWelded.SetActive(true);
