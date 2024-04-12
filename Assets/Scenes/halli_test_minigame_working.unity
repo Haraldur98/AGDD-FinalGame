@@ -47660,7 +47660,7 @@ GameObject:
   - component: {fileID: 669386601}
   m_Layer: 0
   m_Name: overflowfixes
-  m_TagString: Stairs
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
