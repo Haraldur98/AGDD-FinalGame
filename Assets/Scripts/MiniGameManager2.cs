@@ -30,15 +30,6 @@ public class MiniGame2Manager : MonoBehaviour
         scoreText.text = "Cash for job: " + score + "$";
     }
 
-    void Update() {
-        if (score <= 0 && !lost) {
-            movablePrefab = null;
-            fixing = false;
-            lost = true;
-            Destroy(movablePrefab);
-        }
-    }
-
     public void adjustScore()
     {
         switch (difficulty)

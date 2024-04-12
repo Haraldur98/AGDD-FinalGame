@@ -54,7 +54,6 @@ public class MovingObjectController : MonoBehaviour
     }
 
     public float adjustSpeed() {
-        Debug.Log(overallGameManager.currentLevel);
         switch (overallGameManager.currentLevel) {
             case 0:
                 return 5.0f;
