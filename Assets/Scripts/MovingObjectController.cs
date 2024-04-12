@@ -52,12 +52,13 @@ public class MovingObjectController : MonoBehaviour
     }
 
     public float adjustSpeed() {
+        Debug.Log(gameManager.difficulty);
         switch (gameManager.difficulty) {
-            case 1:
+            case 0:
                 return 5.0f;
-            case 2:
+            case 1:
                 return 10.0f;
-            case 3:
+            case 2:
                 return 15.0f;
             default:
                 return 5.0f;
@@ -110,18 +111,6 @@ public class MovingObjectController : MonoBehaviour
             gameManager.SpawnNewMovable(startPosition);
             gameManager.decrementScore();
         }
-        // } else if (stopped && isInBounds && currentBoundary == null && fixing)
-        // {
-        //     foreach (Transform child in currentBoundary.transform)
-        //     {
-        //         if (child.gameObject.name == "base") continue;
-        //         Destroy(child.gameObject);
-        //     }
-            
-        //     currentBoundary.GetComponent<BoxCollider2D>().enabled = false;
-        //     gameManager.BoundaryDestroyed();
-        //     Destroy(gameObject); 
-        //     gameManager.SpawnNewMovable(startPosition);
 
     }
 

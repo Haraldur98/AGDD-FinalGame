@@ -43,15 +43,15 @@ public class MiniGame2Manager : MonoBehaviour
     {
         switch (difficulty)
         {
-            case 1:
+            case 0:
                 score = 1000;
                 decrement = 50;
                 break;
-            case 2:
+            case 1:
                 score = 3000;
                 decrement = 100;
                 break;
-            case 3:
+            case 2:
                 score = 5000;
                 decrement = 300;
                 break;

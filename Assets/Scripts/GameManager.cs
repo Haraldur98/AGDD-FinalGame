@@ -64,9 +64,10 @@ public class GameManager : MonoBehaviour
             isInMiniGame = true;
             // Find the MiniGameManager in the loaded scene
             MiniGame2Manager miniGameManager2 = GameObject.FindObjectOfType<MiniGame2Manager>();
-            Debug.Log("AM HERE:" + mainCamera.transform.position);
+            Debug.Log(currentLevel);
+            miniGameManager2.difficulty = currentLevel;
+            Debug.Log(miniGameManager2.difficulty);
             miniGameManager2.mainCameraPos = mainCamera.transform.position;
-
             // Subscribe to the onMiniGameEnd event
             miniGameManager2.onMiniGameEnd.AddListener(() => EndMiniGame(scene.name));
         }
@@ -125,8 +126,7 @@ public class GameManager : MonoBehaviour
 
 
     public void LoadMiniGame(string sceneName, int level)
-    {
-        currentLevel = level;
+    { // Save the player's score
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
     }
 
