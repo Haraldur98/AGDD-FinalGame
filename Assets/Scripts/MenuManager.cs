@@ -16,8 +16,6 @@ public class MenuManager : MonoBehaviour
     {
         // Update the high scores
         UpdateHighScores();
-        LogPlayerPrefs();
-        Debug.Log("MEOW");
         audioSource.volume = 0.01f;
         audioSource.clip = theme;
         audioSource.loop = true;
@@ -51,7 +49,6 @@ public class MenuManager : MonoBehaviour
 
         // Load the game scene
         SceneManager.LoadScene("halli_test_minigame_working");
-        Debug.Log("StartGame");
     }
 
     private void UpdateHighScores()
@@ -65,23 +62,5 @@ public class MenuManager : MonoBehaviour
 
         // Update the high scores text
         highScoresText.text = string.Join("\n", highScores.Select(x => x.Key.PadRight(maxLength) + ": " + x.Value + "<color=green>$</color>"));
-    }
-
-    public void LogPlayerPrefs()
-    {
-        // List of keys you want to check
-        string[] keys = new string[] { "PlayerName", "Tutorial", "HighScores" };
-
-        foreach (string key in keys)
-        {
-            if (PlayerPrefs.HasKey(key))
-            {
-                Debug.Log(key + ": " + PlayerPrefs.GetString(key));
-            }
-            else
-            {
-                Debug.Log("No value found for key: " + key);
-            }
-        }
     }
 }

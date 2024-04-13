@@ -23,7 +23,6 @@ public class PickUpRadius : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {   
-        // Debug.Log("Collided with " + other.gameObject.name);
         if (other.CompareTag("Steps"))
         {
             canPickUp = true;
@@ -31,19 +30,8 @@ public class PickUpRadius : MonoBehaviour
         }
     }
 
-    // private void OnTriggerStay(Collider other)
-    // {
-    //     Debug.Log("Collided with " + other.gameObject.name);
-        
-    //     if (other.CompareTag("Steps"))
-    //     {
-    //         canPickUp = true;
-    //     }
-    // }
-
     private void OnTriggerExit2D(Collider2D other)
     {
-        // Debug.Log("Collided with " + other.gameObject.name);
 
         if (other.CompareTag("Steps"))
         {

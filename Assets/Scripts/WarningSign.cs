@@ -61,11 +61,8 @@ public class WarningSign : MonoBehaviour
         isInRange = true;
         if (gameInfoPanelInstance == null)
         {
-            
-            Debug.Log("Creating game info panel");
             // Instantiate and set up the game info panel
             gameInfoPanelInstance = Instantiate(gameInfoPanelPrefab, transform.position, Quaternion.identity);
-            // gameInfoPanelInstance.transform.SetParent(transform, false); // Optional: Set parent to keep the UI clean
             infoPanelCanvasGroup = gameInfoPanelInstance.GetComponent<CanvasGroup>();
             // Update the text elements
             UpdateInfoText();
@@ -102,7 +99,6 @@ public class WarningSign : MonoBehaviour
         {
             if (FixPipeScores.TryGetValue(signLevel, out int fixCash))
             {
-                Debug.Log("Fix cash: " + fixCash);
                 potentialCash = fixCash;
             }
         }
@@ -111,7 +107,6 @@ public class WarningSign : MonoBehaviour
 
     private void UpdateInfoText()
     {
-        Debug.Log(gameInfoPanelInstance);
         // Assuming each text component's tag or name is set to identify them
         gameInfoPanelInstance.transform.Find("MiniGameLevel").GetComponent<TextMeshPro>().text = "Level: " + signLevel.ToString();
         AddCash();

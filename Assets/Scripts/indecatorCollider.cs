@@ -12,8 +12,6 @@ public class indecatorCollider : MonoBehaviour
             return;
         }
 
-        Debug.Log("Collided with " + other.gameObject.name);
-
         if (!other.gameObject.CompareTag("Steps"))
         {
             parentScript.canPlace = false;

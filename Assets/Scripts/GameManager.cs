@@ -121,6 +121,10 @@ public class GameManager : MonoBehaviour
     {
         // Get the player's name
         string playerName = PlayerPrefs.GetString("PlayerName", "Player");
+        int cash = PlayerPrefs.GetInt("Score", 0);
+        // Update coin text
+        coinText.text = "<color=green>$</color>:" + cash;
+        coins = cash;
         // Save the high score
         HighScoreManager.Instance.AddHighScore(playerName, coins);
         // Save the player's score

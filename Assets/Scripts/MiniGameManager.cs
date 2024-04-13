@@ -90,7 +90,6 @@ public class MiniGameManager : MonoBehaviour
     {
         if (endPipe.hasWater)
         {
-            Debug.Log("BINGO");
             EndGame();
         }
 
@@ -128,7 +127,6 @@ public class MiniGameManager : MonoBehaviour
     // Call this method to start the water flow from the starting pipe
     public void PropagateWater()
     {
-        Debug.Log("Propagating water");
         // Reset all pipes' water status before starting the propagation
         foreach (Transform child in pipeHolder.transform)
         {
